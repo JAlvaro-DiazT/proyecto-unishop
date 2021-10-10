@@ -2,4 +2,4 @@
 
 Descripción del proyecto...
 
-Prueba union Duvan
+Prueba de conexion duvan
