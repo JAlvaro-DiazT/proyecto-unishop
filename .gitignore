@@ -1,6 +1,3 @@
-#Archivos compilados
-*.class
-
 #Archivos temporales de Maven
 target
 
