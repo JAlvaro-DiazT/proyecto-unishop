@@ -2,11 +2,11 @@
 *.class
 
 #Archivos temporales de Maven
-/**/target/
+target
 
 #Archivos de IntelliJ
 *.iml
-/.idea
+.idea
 
 # Ignora archivos del sistema Mac
 .DS_store
