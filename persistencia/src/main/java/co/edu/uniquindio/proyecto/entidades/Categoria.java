@@ -1,17 +1,5 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-<<<<<<< HEAD
-import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-@Setter
-public class Categoria {
-    @Id
-    private int codigo;
-=======
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +28,5 @@ public class Categoria implements Serializable {
 
     @ManyToMany
     private List<Producto> miProducto;
->>>>>>> DuvanMM
+
 }

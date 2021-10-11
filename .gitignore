@@ -5,17 +5,6 @@ target
 #Archivos de IntelliJ
 *.iml
 .idea
-=======
-#Archivos compilados
-*.class
-
-#Archivos temporales de Maven
-/**/target/
-
-#Archivos de IntelliJ
-*.iml
-/.idea
->>>>>>> DuvanMM
 
 # Ignora archivos del sistema Mac
 .DS_store

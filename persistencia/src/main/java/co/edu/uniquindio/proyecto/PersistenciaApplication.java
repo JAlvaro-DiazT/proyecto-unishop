@@ -7,10 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PersistenciaApplication {
 
     public static void main(String[] args) {
-<<<<<<< HEAD
-=======
 
->>>>>>> DuvanMM
         SpringApplication.run(PersistenciaApplication.class,args);
     }
 }
