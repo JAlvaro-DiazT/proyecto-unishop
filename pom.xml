@@ -20,10 +20,16 @@
     <name>Proyecto uniShop</name>
     <description>Proyecto que agrupa todos los módulos correspondientes al
         aplicativo del proyecto final de programación avanzada(tienda en linea uniShop)</description>
+
     <properties>
         <java.version>11</java.version>
     </properties>
+
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
