@@ -1,26 +1,11 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-<<<<<<< HEAD
-import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-@Setter
-public class Categoria {
-    @Id
-    private int codigo;
-=======
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,16 +14,19 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Categoria implements Serializable {
+public class Ciudad implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(length = 30)
     private String nombre;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "miCiudad")
+    private List<Usuario> miUsuario;
+
+    @OneToMany(mappedBy = "miCiudad")
     private List<Producto> miProducto;
->>>>>>> DuvanMM
 }

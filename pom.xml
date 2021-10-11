@@ -20,21 +20,35 @@
     <name>Proyecto uniShop</name>
     <description>Proyecto que agrupa todos los módulos correspondientes al
         aplicativo del proyecto final de programación avanzada(tienda en linea uniShop)</description>
+<<<<<<< HEAD
     <properties>
         <java.version>11</java.version>
     </properties>
+=======
+
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+
+>>>>>>> DuvanMM
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+<<<<<<< HEAD
             <version>${lombok.version}</version>
+=======
+>>>>>>> DuvanMM
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> DuvanMM
     </dependencies>
 
 </project>

@@ -2,5 +2,9 @@
 
 Descripción del proyecto...
 
+<<<<<<< HEAD
 Prueba: alvaro
 Prueba git
+=======
+Prueba de conexion duvan
+>>>>>>> DuvanMM
