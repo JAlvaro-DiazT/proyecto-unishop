@@ -26,6 +26,7 @@ public class CategoriaTest
     {
 
 
-        //Categoria categoria= new Categoria(320,"Electrodomesticos",);
+        Categoria categoria= new Categoria(320,"Electrodomesticos",null);
+
     }
 }
