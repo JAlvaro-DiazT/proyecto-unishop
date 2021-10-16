@@ -28,11 +28,4 @@ public class Persona implements Serializable {
 
     @Column(nullable = false, length = 30)
     private String password;
-
-    public Persona(Integer codigo, String nombre, String email, String password) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-    }
 }

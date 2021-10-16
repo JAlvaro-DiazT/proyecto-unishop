@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Chat implements Serializable {
 
     @Id
@@ -19,6 +20,7 @@ public class Chat implements Serializable {
     private Integer codigo;
 
     @OneToMany(mappedBy = "miChat")
+    @ToString.Exclude
     private List<Mensaje> miMensaje;
 
     @ManyToOne

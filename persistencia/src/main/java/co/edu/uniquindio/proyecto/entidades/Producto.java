@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Producto implements Serializable {
 
     @Id
@@ -36,6 +37,7 @@ public class Producto implements Serializable {
     private float descuento;
 
     @OneToMany(mappedBy = "miProducto")
+    @ToString.Exclude
     private List<DetalleCompra> miDetalleCompra;
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -53,9 +55,11 @@ public class Producto implements Serializable {
     private Usuario miUsuario;
 
     @OneToMany(mappedBy = "miProducto")
+    @ToString.Exclude
     private List<Subasta> miSubasta;
 
     @OneToMany(mappedBy = "miProducto")
+    @ToString.Exclude
     private List<Comentario> miComentario;
 
     @ManyToMany(mappedBy = "miProducto")

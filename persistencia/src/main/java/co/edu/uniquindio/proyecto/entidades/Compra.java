@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Compra implements Serializable {
 
     @Id
@@ -30,5 +31,6 @@ public class Compra implements Serializable {
     private Usuario miUsuario;
 
     @OneToMany(mappedBy = "miCompra")
+    @ToString.Exclude
     private List<DetalleCompra> miDetalleCompra;
 }
