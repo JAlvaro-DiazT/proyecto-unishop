@@ -7,6 +7,7 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -44,7 +45,8 @@ public class Producto implements Serializable {
     private LocalDateTime fecha_limite;
 
     @ElementCollection
-    private List<String> ruta;
+    @Column(nullable = false)
+    private Map<String,String> imagen;
 
     @ManyToOne
     @JoinColumn(nullable = false)
