@@ -1,3 +1,5 @@
+package co.edu.uniquindio.proyecto.test;
+
 import co.edu.uniquindio.proyecto.entidades.Administrador;
 import co.edu.uniquindio.proyecto.repositorios.AdministradorRepo;
 import org.aspectj.apache.bcel.util.ClassPath;

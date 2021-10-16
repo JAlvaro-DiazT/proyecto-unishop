@@ -17,17 +17,17 @@ insert into Usuario values (102,"roaarnando600@gmail.com","Armando Roa","20TdUn"
 insert into Usuario values (103,"58aldana@mail.com","Miranda Aldana","57393G^nHt^",2);
 
 --4. Registros de usuarios_telefonos
-insert into usuario_telefonos(100,"3017583842","casa")
-insert into usuario_telefonos(101,"3025894563","casa")
-insert into usuario_telefonos(100,"3037286582","Trabajo")
-insert into usuario_telefonos(102,"3044738620","casa")
-insert into usuario_telefonos(103,"3057826587","casa")
+insert into usuario_telefonos(100,"3017583842","casa");
+insert into usuario_telefonos(101,"3025894563","casa");
+insert into usuario_telefonos(100,"3037286582","Trabajo");
+insert into usuario_telefonos(102,"3044738620","casa");
+insert into usuario_telefonos(103,"3057826587","casa");
 
 --5. Registros de compra
-insert into Compra values(0001,2021/10/16,"Debito");
-insert into Compra values(0002,2021/10/16,"Credito");
-insert into Compra values(0003,2021/10/16,"Credito");
-insert into Compra values(0004,2021/10/16,"Debito");
+insert into Compra values(0001,2021/10/16,"Debito",101);
+insert into Compra values(0002,2021/10/16,"Credito",102);
+insert into Compra values(0003,2021/10/16,"Credito",102);
+insert into Compra values(0004,2021/10/16,"Debito",100);
 
 --6. Registros de categoria
 insert into Categoria values(01,"Electrodomesticos");

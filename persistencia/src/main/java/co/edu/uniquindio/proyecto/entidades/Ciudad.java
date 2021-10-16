@@ -10,7 +10,6 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Ciudad implements Serializable {
@@ -30,4 +29,9 @@ public class Ciudad implements Serializable {
     @OneToMany(mappedBy = "miCiudad")
     @ToString.Exclude
     private List<Producto> miProducto;
+
+    public Ciudad(Integer codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 }

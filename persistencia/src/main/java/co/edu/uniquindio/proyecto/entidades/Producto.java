@@ -46,7 +46,7 @@ public class Producto implements Serializable {
 
     @ElementCollection
     @Column(nullable = false)
-    private Map<String,String> imagen;
+    private Map<String,String> ruta;
 
     @ManyToOne
     @JoinColumn(nullable = false)
