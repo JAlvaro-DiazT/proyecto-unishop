@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class CiudadTest {
 
     @Test // programa de tipo test para ingresar una ciudad
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
+    public void registrarTest()
     {
         Ciudad ciudad=  new Ciudad(5,"Armenia");
         Ciudad ciudadGuardada= ciudadRepo.save(ciudad);
