@@ -33,7 +33,7 @@ public class CiudadTest {
     {
         //borramos la ciudad buscando por codigo
         ciudadRepo.deleteById(2);
-        //Se busca la ciudad para verificar su lo borro
+        //Se busca la ciudad para verificar si lo borro
 
         Ciudad ciudadBuscada = ciudadRepo.findById(2).orElse(null);
         // para decir que lo que espero es un null

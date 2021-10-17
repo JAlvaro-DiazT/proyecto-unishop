@@ -43,10 +43,14 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Comentario> miComentario;
 
-    @ManyToMany(mappedBy = "miFavorito")
-    private List<Producto> favorito;
+    @ManyToMany(mappedBy = "miFavoritoUsuario")
+    @ToString.Exclude
+    private List<Producto> miProductofavorito;
 
-    public Usuario(Integer codigo, String nombre, String email, String password) {
-        super(codigo, nombre, email, password);
+    public Usuario(Integer codigo, String email, String nombre, String password, Map<String, String> telefonos, Ciudad miCiudad) {
+        super(codigo, email, nombre, password);
+        this.telefonos = telefonos;
+        this.miCiudad = miCiudad;
     }
+
 }

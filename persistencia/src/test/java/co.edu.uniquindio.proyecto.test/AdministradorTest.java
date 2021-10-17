@@ -33,7 +33,7 @@ public class AdministradorTest
     @Sql("classpath:datosUnishop.sql")
     public void eliminarTest()
     {
-        //borramos el usuario buscando por codigo
+        //borramos el administrador buscando por codigo
         administradorRepo.deleteById(003);
         //busco el administrador para verificar su lo borro
 
@@ -51,7 +51,7 @@ public class AdministradorTest
         //Se guarda la modificación
         administradorRepo.save(administrador);
 
-        //Busco la ciudad
+
         Administrador adminBuscado = administradorRepo.findById(004).orElse(null);
 
         //Se busca que si haya quedado en el registro el cambio

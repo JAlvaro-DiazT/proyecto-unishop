@@ -26,6 +26,11 @@ public class Categoria implements Serializable {
     private String nombre;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Producto> miProducto;
 
+    public Categoria(Integer codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 }

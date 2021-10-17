@@ -26,4 +26,9 @@ public class Chat implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario miUsuario;
+
+    public Chat(Integer codigo, Usuario miUsuario) {
+        this.codigo = codigo;
+        this.miUsuario = miUsuario;
+    }
 }

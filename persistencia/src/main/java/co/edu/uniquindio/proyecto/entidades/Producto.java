@@ -65,9 +65,23 @@ public class Producto implements Serializable {
     private List<Comentario> miComentario;
 
     @ManyToMany(mappedBy = "miProducto")
+    @ToString.Exclude
     private List<Categoria> miCategoria;
 
     @ManyToMany
-    private List<Usuario> miFavorito;
+    @ToString.Exclude
+    private List<Usuario> miFavoritoUsuario;
 
+    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, float precio, float descuento, LocalDateTime fecha_limite, Map<String, String> imagen, Ciudad miCiudad, Usuario miUsuario) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.unidades = unidades;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.descuento = descuento;
+        this.fecha_limite = fecha_limite;
+        this.imagen = imagen;
+        this.miCiudad = miCiudad;
+        this.miUsuario = miUsuario;
+    }
 }
