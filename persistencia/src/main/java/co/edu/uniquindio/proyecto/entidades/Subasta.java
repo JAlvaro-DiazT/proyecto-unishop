@@ -7,6 +7,18 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+    Entidad Subasta, representa el proceso de subasta de un producto dentro de unishop
+
+    La clase esta marcada con @Entity para que sea considerada entidad y a la hora de
+    desplegar el proyecto poder mapear la clase a la base de datos en SQL
+
+    Se cuenta con los metodos @Getter, @Setter @NoArgsConstructor y @ToString(callSuper = true)
+    de esta manera accedemos a los datos.
+
+    Todos los atributos cuentan con su respectiva parametrizacion, con lo cual se agregan
+    las restricciones pertinentes a los atributos.
+ */
 @Getter
 @Setter
 @Entity

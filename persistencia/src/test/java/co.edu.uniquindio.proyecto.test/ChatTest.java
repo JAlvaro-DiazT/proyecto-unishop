@@ -17,6 +17,18 @@ import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad Chat.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
 public class ChatTest {
@@ -28,8 +40,8 @@ public class ChatTest {
 
     @Test // programa de tipo test para ingresar en un chat
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
-    {
+    public void RegistrarTest() {
+
         //Obtener un usuario ya registrado
         Usuario usuario =  usuarioRepo.findById(101).orElse(null);
 
@@ -41,8 +53,8 @@ public class ChatTest {
 
     @Test // programa de tipo test para eliminar un chat
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
+    public void eliminarTest() {
+
         //borramos el chat buscando por codigo
         chatRepo.deleteById(800);
 
@@ -53,8 +65,8 @@ public class ChatTest {
 
     @Test // programa de tipo test para actualizar un chat
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         //Obtener un usuario ya registrado
         Usuario usuario =  usuarioRepo.findById(103).orElse(null);
 
@@ -67,13 +79,12 @@ public class ChatTest {
 
         //Se busca que si haya quedado en el registro el cambio
         Assertions.assertEquals(usuario,chatBuscado.getMiUsuario());
-
     }
 
     @Test // programa de tipo test para listar los chats creados
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<Chat> chats =chatRepo.findAll();
         chats.forEach(Chat -> System.out.println(Chat));
     }

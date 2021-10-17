@@ -18,6 +18,18 @@ import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad Subasta.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
 public class SubastaTest {
@@ -29,8 +41,8 @@ public class SubastaTest {
 
     @Test // programa de tipo test para ingresar una subasta
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
-    {
+    public void RegistrarTest() {
+
         //Obtener un producto ya registrado
         Producto producto =  productoRepo.findById(202).orElse(null);
 
@@ -42,8 +54,8 @@ public class SubastaTest {
 
     @Test // programa de tipo test para eliminar una subasta
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
+    public void eliminarTest() {
+
         //borramos la subasta buscando por codigo
         subastaRepo.deleteById(500);
 
@@ -54,8 +66,8 @@ public class SubastaTest {
 
     @Test // programa de tipo test para actualizar una subasta
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         //Obtener un producto ya registrado
         Producto producto =  productoRepo.findById(203).orElse(null);
 
@@ -73,8 +85,8 @@ public class SubastaTest {
 
     @Test // programa de tipo test para listar los subastas
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<Subasta> subastas =subastaRepo.findAll();
         subastas.forEach(Subasta -> System.out.println(Subasta));
     }

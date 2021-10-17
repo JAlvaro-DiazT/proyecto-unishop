@@ -16,6 +16,18 @@ import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad Comentario.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
 public class ComentarioTest {
@@ -30,8 +42,8 @@ public class ComentarioTest {
 
     @Test // programa de tipo test para ingresar un comentario
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
-    {
+    public void RegistrarTest() {
+
         //Obtener un producto ya registrado
         Producto producto =  productoRepo.findById(203).orElse(null);
 
@@ -46,8 +58,8 @@ public class ComentarioTest {
 
     @Test // programa de tipo test para eliminar un comentario
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
+    public void eliminarTest() {
+
         //borramos el comentario buscando por codigo
         comentarioRepo.deleteById(400);
 
@@ -58,8 +70,8 @@ public class ComentarioTest {
 
     @Test // programa de tipo test para actualizar un comentario
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         Comentario comentario = comentarioRepo.findById(403).orElse(null);
         comentario.setMensaje("Ya recibí los accesorios del producto, gracias");
         //Se guarda la modificación
@@ -69,13 +81,12 @@ public class ComentarioTest {
 
         //Se busca que si haya quedado en el registro el cambio
         Assertions.assertEquals("Ya recibí los accesorios del producto, gracias",comentarioBuscado.getMensaje());
-
     }
 
     @Test // programa de tipo test para listar los comentarios creados
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<Comentario> comentarios =comentarioRepo.findAll();
         comentarios.forEach(Comentario -> System.out.println(Comentario));
     }

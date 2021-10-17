@@ -11,6 +11,18 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad DetalleCompra.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
 public class DetalleCompraTest {
@@ -25,8 +37,8 @@ public class DetalleCompraTest {
 
     @Test // programa de tipo test para ingresar el detalle de una compra
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
-    {
+    public void RegistrarTest() {
+
         //Obtener un producto ya registrado
         Producto producto =  productoRepo.findById(203).orElse(null);
 
@@ -41,8 +53,8 @@ public class DetalleCompraTest {
 
     @Test // programa de tipo test para eliminar el detalle de una compra
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
+    public void eliminarTest() {
+
         //borramos el detalle de la compra buscando por codigo
         detalleCompraRepo.deleteById(301);
 
@@ -53,8 +65,8 @@ public class DetalleCompraTest {
 
     @Test // programa de tipo test para actualizar el detalle de una compra
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         DetalleCompra detalleCompra = detalleCompraRepo.findById(304).orElse(null);
         detalleCompra.setUnidades(6);
         //Se guarda la modificación
@@ -64,13 +76,12 @@ public class DetalleCompraTest {
 
         //Se busca que si haya quedado en el registro el cambio
         Assertions.assertEquals(6,detalleCompra1.getUnidades());
-
     }
 
     @Test // programa de tipo test para listar los detalles de las compras
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<DetalleCompra> detalleCompras =detalleCompraRepo.findAll();
         detalleCompras.forEach(DetalleCompra -> System.out.println(DetalleCompra));
     }

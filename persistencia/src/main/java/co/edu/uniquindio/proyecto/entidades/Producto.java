@@ -9,6 +9,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+/*
+    Entidad Producto, la cual representa los productos que van a ser vendidos/comprados en
+    unishop, cuenta con todos los atributos necesarios para describir a detalle un producto.
+
+    La clase esta marcada con @Entity para que sea considerada entidad y a la hora de
+    desplegar el proyecto poder mapear la clase a la base de datos en SQL
+
+    Se cuenta con los metodos @Getter, @Setter @NoArgsConstructor y @ToString(callSuper = true)
+    de esta manera accedemos a los datos.
+
+    Todos los atributos cuentan con su respectiva parametrizacion, con lo cual se agregan
+    las restricciones pertinentes a los atributos.
+ */
 @Getter
 @Setter
 @Entity

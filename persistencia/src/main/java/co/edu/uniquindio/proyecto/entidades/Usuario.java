@@ -1,12 +1,24 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/*
+    Entidad Usuario, hereda atributos de la entidad Persona, representa los usuarios dentro de
+    unishop con todos los datos basicos para poder interactuar con la aplicacion.
+
+    La clase esta marcada con @Entity para que sea considerada entidad y a la hora de
+    desplegar el proyecto poder mapear la clase a la base de datos en SQL
+
+    Se cuenta con los metodos @Getter, @Setter @NoArgsConstructor y @ToString(callSuper = true)
+    de esta manera accedemos a los datos.
+
+    Todos los atributos cuentan con su respectiva parametrizacion, con lo cual se agregan
+    las restricciones pertinentes a los atributos.
+ */
 @Entity
 @Getter
 @Setter

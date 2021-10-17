@@ -17,6 +17,18 @@ import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad Mensaje.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
 public class MensajeTest {
@@ -29,8 +41,8 @@ public class MensajeTest {
 
     @Test // programa de tipo test para ingresar un mensaje
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
-    {
+    public void RegistrarTest() {
+
         //Obtener un chat ya registrado
         Chat chat =  chatRepo.findById(802).orElse(null);
 
@@ -42,8 +54,8 @@ public class MensajeTest {
 
     @Test // programa de tipo test para eliminar un mensaje
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
+    public void eliminarTest() {
+
         //borramos el mensaje buscando por codigo
         mensajeRepo.deleteById(900);
 
@@ -54,8 +66,8 @@ public class MensajeTest {
 
     @Test // programa de tipo test para actualizar un mensaje
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         Mensaje mensaje = mensajeRepo.findById(902).orElse(null);
         mensaje.setEmisor("Duvan Marin");
         //Se guarda la modificación
@@ -70,8 +82,8 @@ public class MensajeTest {
 
     @Test // programa de tipo test para listar los mensajes
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<Mensaje> mensajes =mensajeRepo.findAll();
         mensajes.forEach(Mensaje -> System.out.println(Mensaje));
     }
