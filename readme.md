@@ -28,6 +28,4 @@
 
 #### El vendedor de un producto cuenta con la autonomía de ponerle o quitarle el descuento a un producto cuando quiera.
 
-#### 
-
 
