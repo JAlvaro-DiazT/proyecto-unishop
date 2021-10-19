@@ -86,9 +86,10 @@ public class Producto implements Serializable {
     private List<Usuario> miFavoritoUsuario;
 
     @OneToOne
+    @JoinColumn(nullable = false)
     private Seguro miSeguro;
 
-    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, float precio, float descuento, LocalDateTime fecha_limite, Map<String, String> imagen, Ciudad miCiudad, Usuario miUsuario) {
+    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, float precio, float descuento, LocalDateTime fecha_limite, Map<String, String> imagen, Ciudad miCiudad, Usuario miUsuario, Seguro miseguro) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.unidades = unidades;
@@ -99,5 +100,6 @@ public class Producto implements Serializable {
         this.imagen = imagen;
         this.miCiudad = miCiudad;
         this.miUsuario = miUsuario;
+        this.miSeguro = miseguro;
     }
 }

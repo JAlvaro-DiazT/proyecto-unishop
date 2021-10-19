@@ -3,6 +3,9 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -41,6 +44,12 @@ public class Comentario implements Serializable {
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fecha_comentario;
+
+    @Column(nullable = false)
+    @Positive
+    @Max(5)
+    @Min(1)
+    private int calificacion;
 
     @ManyToOne
     @JoinColumn(nullable = false)

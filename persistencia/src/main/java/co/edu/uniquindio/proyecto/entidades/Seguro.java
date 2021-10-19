@@ -50,6 +50,14 @@ public class Seguro implements Serializable {
     private float valor;
 
     @OneToOne(mappedBy = "miSeguro")
+    @ToString.Exclude
     private Producto miProducto;
 
+    public Seguro(Integer codigo, String descripcion, LocalDateTime fecha_inicio, LocalDateTime fecha_vencimiento, float valor) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_vencimiento = fecha_vencimiento;
+        this.valor = valor;
+    }
 }

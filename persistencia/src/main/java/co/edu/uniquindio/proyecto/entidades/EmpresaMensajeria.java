@@ -41,7 +41,13 @@ public class EmpresaMensajeria implements Serializable {
     @Column(length = 10)
     private String telefono;
 
-    @OneToOne
+    @OneToOne(mappedBy = "miEmpresaMensajeria")
+    @ToString.Exclude
     private Compra miCompra;
 
+    public EmpresaMensajeria(Integer codigo, String nombre, String telefono) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.telefono = telefono;
+    }
 }

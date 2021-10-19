@@ -50,7 +50,7 @@ public class ComentarioTest {
         //Obtener un usuario ya registrado
         Usuario usuario =  usuarioRepo.findById(101).orElse(null);
 
-        Comentario comentario=  new Comentario(410,"Me encanto el producto","Nos alegra que te haya gustado",LocalDateTime.now(),producto,usuario);
+        Comentario comentario=  new Comentario(410,"Me encanto el producto","Nos alegra que te haya gustado",LocalDateTime.now(),5,producto,usuario);
 
         Comentario comentarioGuardado= comentarioRepo.save(comentario);
         Assertions.assertNotNull(comentarioGuardado);

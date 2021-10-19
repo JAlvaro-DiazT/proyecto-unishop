@@ -1,12 +1,9 @@
 package co.edu.uniquindio.proyecto.test;
 
-import co.edu.uniquindio.proyecto.entidades.Ciudad;
-import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.EmpresaMensajeria;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
+import co.edu.uniquindio.proyecto.entidades.Seguro;
 import co.edu.uniquindio.proyecto.repositorios.EmpresaMensajeriaRepo;
-import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import co.edu.uniquindio.proyecto.repositorios.SeguroRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +12,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
     Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
-    Actualizar y Listar de la entidad Compra.
+    Actualizar y Listar de la entidad EmpresaMensajeria.
 
     La anotacion @DataJpaTest indica que es una clase para probar datos
     La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
@@ -33,65 +28,53 @@ import java.util.Map;
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
-public class CompraTest {
-
-    @Autowired
-    private UsuarioRepo usuarioRepo;
-
-    @Autowired
-    private CompraRepo compraRepo;
-
+public class EmpresaMensajeriaTest {
     @Autowired
     private EmpresaMensajeriaRepo empresaMensajeriaRepo;
 
-    @Test // programa de tipo test para ingresar una compra con usuario y empresa de mensajeria
+
+    @Test // programa de tipo test para ingresar una empresa de mensajeria
     @Sql("classpath:datosUnishop.sql")
     public void RegistrarTest() {
+        EmpresaMensajeria empresaMensajeria=  new EmpresaMensajeria(2222,"TCC","3129875385");
 
-        //Obtener un usuario ya registrado
-        Usuario miUsuario =  usuarioRepo.findById(103).orElse(null);
-
-        //Obtener una empresa de mensajeria ya registrada
-        EmpresaMensajeria empresaMensajeria =  empresaMensajeriaRepo.findById(2000).orElse(null);
-
-        Compra compra=  new Compra(0005, LocalDateTime.now(),"Credito",miUsuario,empresaMensajeria);
-        Compra compraGuardada= compraRepo.save(compra);
-        Assertions.assertNotNull(compraGuardada);
+        EmpresaMensajeria empresaMsjGuardada= empresaMensajeriaRepo.save(empresaMensajeria);
+        Assertions.assertNotNull(empresaMsjGuardada);
     }
 
-    @Test // programa de tipo test para eliminar una compra
+    @Test // programa de tipo test para eliminar una empresa de mensajeria
     @Sql("classpath:datosUnishop.sql")
     public void eliminarTest() {
 
-        //borramos la compra buscando por codigo
-        compraRepo.deleteById(0002);
+        //borramos la empresa de mensajeria buscando por codigo
+        empresaMensajeriaRepo.deleteById(2000);
 
-        Compra compraBuscada = compraRepo.findById(0002).orElse(null);
+        EmpresaMensajeria empresaMensajeriaBuscada = empresaMensajeriaRepo.findById(2000).orElse(null);
         // para decir que lo que espero es un null
-        Assertions.assertNull(compraBuscada);
+        Assertions.assertNull(empresaMensajeriaBuscada);
     }
 
-    @Test // programa de tipo test para actualizar una compra
+    @Test // programa de tipo test para actualizar una empresa de mensajeria
     @Sql("classpath:datosUnishop.sql")
     public void actualizarTest() {
 
-        Compra compra = compraRepo.findById(0002).orElse(null);
-        compra.setMedio_pago("Debito");
+        EmpresaMensajeria empresaMensajeria = empresaMensajeriaRepo.findById(2002).orElse(null);
+        empresaMensajeria.setTelefono("3208473628");
         //Se guarda la modificación
-        compraRepo.save(compra);
+        empresaMensajeriaRepo.save(empresaMensajeria);
 
-        Compra compraBuscada = compraRepo.findById(0002).orElse(null);
+        EmpresaMensajeria empresaMsjBuscado = empresaMensajeriaRepo.findById(2002).orElse(null);
 
         //Se busca que si haya quedado en el registro el cambio
-        Assertions.assertEquals("Debito",compraBuscada.getMedio_pago());
+        Assertions.assertEquals("3208473628",empresaMsjBuscado.getTelefono());
 
     }
 
-    @Test // programa de tipo test para listar las compras realizadas
+    @Test // programa de tipo test para listar las empresas de mensajeria creadas
     @Sql("classpath:datosUnishop.sql")
     public void ListarTest() {
 
-        List<Compra> compras =compraRepo.findAll();
-        compras.forEach(Compra -> System.out.println(Compra));
+        List<EmpresaMensajeria> empresas =empresaMensajeriaRepo.findAll();
+        empresas.forEach(EmpresaMensajeria -> System.out.println(EmpresaMensajeria));
     }
 }

@@ -52,7 +52,8 @@ public class UsuarioTest {
         telefonos.put("3192738324","Casa");
         telefonos.put("3121927675","Trabajo");
 
-        Usuario usuario=  new Usuario(110,"alvaro@email.com","Alvaro Diaz","i4u1y4",telefonos, miCiudad);
+        Usuario usuario=  new Usuario(110,"alvaro@email.com","Alvaro Diaz",
+                "i4u1y4",telefonos, miCiudad);
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         Assertions.assertNotNull(usuarioGuardado);
     }

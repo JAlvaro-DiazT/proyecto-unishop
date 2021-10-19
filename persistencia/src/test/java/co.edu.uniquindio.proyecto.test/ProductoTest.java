@@ -2,9 +2,11 @@ package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Seguro;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.repositorios.SeguroRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -42,8 +44,11 @@ public class ProductoTest {
     @Autowired
     private CiudadRepo ciudadRepo;
 
+    @Autowired
+    private SeguroRepo seguroRepo;
 
-    @Test // programa de tipo test para ingresar un producto con ciudad,usuario e imagen
+
+    @Test // programa de tipo test para ingresar un producto con ciudad,usuario,seguro e imagen
     @Sql("classpath:datosUnishop.sql")
     public void RegistrarTest() {
 
@@ -53,12 +58,15 @@ public class ProductoTest {
         //Obtener un usuario ya registrado
         Usuario usuario =  usuarioRepo.findById(101).orElse(null);
 
+        //Obtener un seguro ya registrado
+        Seguro seguro =  seguroRepo.findById(1001).orElse(null);
+
         Map<String,String> imagen = new HashMap<>();
         imagen.put("ruta/img5",".jpg");
 
         Producto producto=  new Producto(210,"destornillador",30,
                 "herramientas de mano diseñados para apretar o aflojar tornillos",
-                8000,9, LocalDateTime.now(),imagen,miCiudad,usuario);
+                8000,9, LocalDateTime.now(),imagen,miCiudad,usuario,seguro);
 
         Producto productoGuardado= productoRepo.save(producto);
         Assertions.assertNotNull(productoGuardado);
