@@ -28,4 +28,10 @@
 
 #### El vendedor de un producto cuenta con la autonomía de ponerle o quitarle el descuento a un producto cuando quiera.
 
+#### El sistema contara con dos funcionalidades adicionales las cuales beneficiaran bastante al cliente al momento de realizar una compra:
+
+#### 1. El cliente al momento de realizar la compra podra seleccionar la empresa de mensajeria de su preferencia, que se encargara de llevar su producto hasta el lugar que indique.
+
+#### 2. Los productos contaran con un seguro todo riesgo en el cual el cliente podra elegir el periodo de tiempo de vigencia de dicho seguro.
+
 
