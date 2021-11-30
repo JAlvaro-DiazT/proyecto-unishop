@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
@@ -34,12 +31,15 @@ public class DetalleCompra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
     @Positive
+    @Column(nullable = false)
     private Integer unidades;
 
     @Positive
+    @Column(nullable = false)
     private float precio_producto;
 
     @ManyToOne

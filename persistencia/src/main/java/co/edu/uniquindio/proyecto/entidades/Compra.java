@@ -32,9 +32,10 @@ public class Compra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false)
     private LocalDateTime fecha_compra;
 
     @Column(length = 30)
@@ -49,7 +50,6 @@ public class Compra implements Serializable {
     private List<DetalleCompra> miDetalleCompra;
 
     @OneToOne
-    @JoinColumn(nullable = false)
     private EmpresaMensajeria miEmpresaMensajeria;
 
     public Compra(Integer codigo, LocalDateTime fecha_compra, String medio_pago, Usuario miUsuario,EmpresaMensajeria miEmpresaMensajeria) {

@@ -31,6 +31,7 @@ public class Chat implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
     @OneToMany(mappedBy = "miChat")

@@ -36,7 +36,7 @@ public class CategoriaTest {
     @Sql("classpath:datosUnishop.sql")
     public void RegistrarTest() {
 
-        Categoria categoria=  new Categoria(04,"Artesanias");
+        Categoria categoria =  new Categoria(04,"Artesanias");
         Categoria categoriaGuardada= categoriaRepo.save(categoria);
         Assertions.assertNotNull(categoriaGuardada);
     }
@@ -74,6 +74,16 @@ public class CategoriaTest {
 
         List<Categoria> categorias =categoriaRepo.findAll();
         categorias.forEach(Categoria -> System.out.println(Categoria));
+    }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void listarPorCategoriasYCalificacionTest() {
+        List<Object[]> respuesta = categoriaRepo.listarPorCategoriasYCalificacion();
+
+        for(Object[] objeto:respuesta){
+            System.out.println(objeto[0]+"-----"+objeto[1]);
+        }
     }
 
 }

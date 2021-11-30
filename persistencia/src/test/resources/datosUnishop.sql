@@ -11,10 +11,10 @@ insert into Administrador values (003,"lucir@mail.com","Lucia Ramirez","luci200#
 insert into Administrador values (004,"m_montero13@hotmail.com","Miriam Montero","m12345");
 
 --3. Registros de usuario
-insert into Usuario values (100,"j_a_r260@gmail.com","Jarib Romero","123Jarib20@",1);
-insert into Usuario values (101,"bedoyita2020@gmail.com","Zulma Bedoya","zbedoya40",1);
-insert into Usuario values (102,"roaarnando600@gmail.com","Armando Roa","20TdUn",3);
-insert into Usuario values (103,"58aldana@mail.com","Miranda Aldana","57393G^nHt^",2);
+insert into Usuario values (100,"j_a_r260@gmail.com","Jarib Romero","123Jarib20@","abc", 1);
+insert into Usuario values (101,"bedoyita2020@gmail.com","Zulma Bedoya","zbedoya40", "def", 1);
+insert into Usuario values (102,"roaarnando600@gmail.com","Armando Roa","20TdUn", "ghi", 3);
+insert into Usuario values (103,"58aldana@mail.com","Miranda Aldana","57393G^nHt^", "jkl", 2);
 
 --4. Registros de usuarios_telefonos
 insert into usuario_telefonos values(100,"3017583842","casa");
@@ -39,6 +39,7 @@ insert into Compra values(0004,"2021/10/16","Debito",2003,100);
 insert into Categoria values(01,"Electrodomesticos");
 insert into Categoria values(02,"Herramientas");
 insert into Categoria values(03,"Equipamiento medico");
+insert into Categoria values(4,"Hogar");
 
 --8. Registros de seguro
 insert into Seguro values(1000,"Se cubre el 100% del valor del producto en caso de daños ocasionados durante la entrega","2021/10/19","2021/12/19",50000);
@@ -77,10 +78,10 @@ insert into detalle_compra values (302,400000,2,0003,202);
 insert into detalle_compra values (304,12000000,4,0004,203);
 
 --14. Registros de producto_imagen
-insert into producto_imagen values(200,"ruta/img1",".jpg");
-insert into producto_imagen values(201,"ruta/img2",".jpg");
-insert into producto_imagen values(202,"ruta/img3",".jpg");
-insert into producto_imagen values(203,"ruta/img4",".jpg");
+insert into producto_imagen values(200,"ruta/img1.jpg");
+insert into producto_imagen values(201,"ruta/img2.jpg");
+insert into producto_imagen values(202,"ruta/img3.jpg");
+insert into producto_imagen values(203,"ruta/img4.jpg");
 
 --15. Registros de chat
 insert into Chat values (800,100);

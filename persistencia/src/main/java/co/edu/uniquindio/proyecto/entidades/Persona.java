@@ -1,8 +1,12 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 /*
@@ -34,14 +38,21 @@ public class Persona implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @Positive
     private Integer codigo;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = true)
+    @Email(message = "Escriba un email valido")
+    @NotBlank
     private String email;
 
-    @Column(length = 20)
+    @Column(nullable = false, length = 50)
+    @Length(max = 50)
+    @NotBlank
     private String nombre;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 20)
+    @Length(max = 20, message = "La contraseña debe tener maximo 20 caracteres")
+    @NotBlank
     private String password;
 }

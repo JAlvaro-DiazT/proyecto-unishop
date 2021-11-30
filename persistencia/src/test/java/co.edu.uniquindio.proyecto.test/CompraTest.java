@@ -94,4 +94,26 @@ public class CompraTest {
         List<Compra> compras =compraRepo.findAll();
         compras.forEach(Compra -> System.out.println(Compra));
     }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void listarProductosYUsuariosTest() {
+
+        List<Object[]> respuesta = compraRepo.listarPorMedioDepPago();
+        //respuesta.forEach(System.out::println);
+        for(Object[] objeto:respuesta){
+            System.out.println(objeto[0]+"-----"+objeto[1]);
+        }
+    }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void valorTotalComprasTest() {
+
+        List<Object[]> respuesta = compraRepo.valorTotalCompras(100);
+
+        for(Object[] objeto:respuesta){
+            System.out.println("Codigo compra "+objeto[0]+"----- Valor compra: "+objeto[1]);
+        }
+    }
 }

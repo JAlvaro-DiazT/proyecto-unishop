@@ -3,9 +3,13 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,41 +37,46 @@ public class Producto implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
-    @Column(length = 20)
+    @NotBlank(message = "El nombre del producto es obligatorio")
+    @Column(length = 20, nullable = false)
     private String nombre;
 
-    @Positive
+    @PositiveOrZero
+    @Column(nullable = false)
     private Integer unidades;
 
-    @Column(length = 500)
+    @NotBlank
+    @Column(length = 500, nullable = false)
     private String  descripcion;
 
     @Positive
+    @Column(nullable = false)
     private float precio;
 
-    @Positive
+    @PositiveOrZero
+    @Column(nullable = false)
     private float descuento;
 
     @OneToMany(mappedBy = "miProducto")
     @ToString.Exclude
     private List<DetalleCompra> miDetalleCompra;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Future
+    @Column(nullable = false)
     private LocalDateTime fecha_limite;
 
     @ElementCollection
-    @Column(nullable = false)
-    private Map<String,String> imagen;
+    private List<String> imagen;
+
+    @ManyToOne
+    private Ciudad ciudad;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Ciudad miCiudad;
-
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Usuario miUsuario;
+    private Usuario vendedor;
 
     @OneToMany(mappedBy = "miProducto")
     @ToString.Exclude
@@ -77,20 +86,18 @@ public class Producto implements Serializable {
     @ToString.Exclude
     private List<Comentario> miComentario;
 
-    @ManyToMany(mappedBy = "miProducto")
+    @ManyToMany
     @ToString.Exclude
-    private List<Categoria> miCategoria;
+    private List<Categoria> categoria;
 
     @ManyToMany
     @ToString.Exclude
     private List<Usuario> miFavoritoUsuario;
 
     @OneToOne
-    @JoinColumn(nullable = false)
-    private Seguro miSeguro;
+    private Seguro seguro;
 
-    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, float precio, float descuento, LocalDateTime fecha_limite, Map<String, String> imagen, Ciudad miCiudad, Usuario miUsuario, Seguro miseguro) {
-        this.codigo = codigo;
+    public Producto(String nombre, Integer unidades, String descripcion, float precio, float descuento, LocalDateTime fecha_limite, List<String> imagen, Ciudad ciudad, Usuario vendedor, Seguro seguro) {
         this.nombre = nombre;
         this.unidades = unidades;
         this.descripcion = descripcion;
@@ -98,8 +105,15 @@ public class Producto implements Serializable {
         this.descuento = descuento;
         this.fecha_limite = fecha_limite;
         this.imagen = imagen;
-        this.miCiudad = miCiudad;
-        this.miUsuario = miUsuario;
-        this.miSeguro = miseguro;
+        this.ciudad = ciudad;
+        this.vendedor = vendedor;
+        this.seguro = seguro;
+    }
+
+    public String getImagenPrincipal(){
+        if(imagen!=null && !imagen.isEmpty()){
+            return imagen.get(0);
+        }
+        return "default.png";
     }
 }

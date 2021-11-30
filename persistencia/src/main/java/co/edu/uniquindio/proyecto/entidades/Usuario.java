@@ -27,13 +27,15 @@ import java.util.Map;
 @ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(nullable = false)
     private Map<String, String> telefonos;
 
+    @Column(nullable = false, unique = true)
+    private String username;
+
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Ciudad miCiudad;
+    private Ciudad ciudad;
 
     @OneToMany(mappedBy = "miUsuario")
     @ToString.Exclude
@@ -43,7 +45,7 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Compra> miCompra;
 
-    @OneToMany(mappedBy = "miUsuario")
+    @OneToMany(mappedBy = "vendedor")
     @ToString.Exclude
     private List<Producto> miProducto;
 
@@ -59,10 +61,10 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Producto> miProductofavorito;
 
-    public Usuario(Integer codigo, String email, String nombre, String password, Map<String, String> telefonos, Ciudad miCiudad) {
+    public Usuario(Integer codigo, String email, String nombre, String password, Map<String, String> telefonos, Ciudad ciudad) {
         super(codigo, email, nombre, password);
         this.telefonos = telefonos;
-        this.miCiudad = miCiudad;
+        this.ciudad = ciudad;
     }
 
 }

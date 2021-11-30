@@ -2,7 +2,10 @@ package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.entidades.Compra;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /*
     Repositorio CompraRepo, Interface la cual extiende de JpaRepository, cuenta con dos datos:
@@ -12,4 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
+    //La cantidad de compras que se hace por cada medio de pago disponible.
+    @Query("select c.medio_pago, count(c) from Compra c group by c.medio_pago")
+    List<Object[]> listarPorMedioDepPago();
+
+    //El valor total de cada una de las compras que ha hecho un usuario específico.
+    @Query("select c.codigo, sum(d.precio_producto * d.unidades) from Compra c join DetalleCompra d join c.miUsuario u where u.codigo = :cod")
+    List<Object[]> valorTotalCompras(Integer cod);
 }

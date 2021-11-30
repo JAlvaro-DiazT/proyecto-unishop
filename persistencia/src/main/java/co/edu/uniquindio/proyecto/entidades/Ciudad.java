@@ -36,11 +36,11 @@ public class Ciudad implements Serializable {
     @Column(length = 30)
     private String nombre;
 
-    @OneToMany(mappedBy = "miCiudad")
+    @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
     private List<Usuario> miUsuario;
 
-    @OneToMany(mappedBy = "miCiudad")
+    @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
     private List<Producto> miProducto;
 

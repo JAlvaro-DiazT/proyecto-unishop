@@ -18,6 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /*
     Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
@@ -92,4 +93,22 @@ public class UsuarioTest {
         List<Usuario> usuarios =usuarioRepo.findAll();
         usuarios.forEach(Usuario -> System.out.println(Usuario));
     }
+
+    @Test // programa de tipo test para listar los usuarios por un nombre especifico
+    @Sql("classpath:datosUnishop.sql")
+    public void FiltrarNombreTest() {
+
+        List<Usuario> lista = usuarioRepo.findAllByNombreContains("Armando");
+        lista.forEach( u -> System.out.println(u));
+    }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void FiltrarCorreoTest() {
+        Optional<Usuario> correo = usuarioRepo.findByEmail("rmontez@hotmail.com");
+        System.out.println(correo);
+    }
+
+
+
 }

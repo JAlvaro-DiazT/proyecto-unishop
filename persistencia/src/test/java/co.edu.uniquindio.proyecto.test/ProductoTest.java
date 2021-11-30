@@ -16,9 +16,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
     Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
@@ -61,10 +59,10 @@ public class ProductoTest {
         //Obtener un seguro ya registrado
         Seguro seguro =  seguroRepo.findById(1001).orElse(null);
 
-        Map<String,String> imagen = new HashMap<>();
-        imagen.put("ruta/img5",".jpg");
+        ArrayList<String> imagen = new ArrayList<>();
+        imagen.add("ruta/img5.jpg");
 
-        Producto producto=  new Producto(210,"destornillador",30,
+        Producto producto=  new Producto("destornillador",30,
                 "herramientas de mano diseñados para apretar o aflojar tornillos",
                 8000,9, LocalDateTime.now(),imagen,miCiudad,usuario,seguro);
 
@@ -107,4 +105,32 @@ public class ProductoTest {
         List<Producto> productos =productoRepo.findAll();
         productos.forEach(Producto -> System.out.println(Producto));
     }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void buscarProductoPorUsuarioTest() {
+
+        List<Producto> lista = productoRepo.buscarProductoPorUsuario(102);
+        lista.forEach( u -> System.out.println(u));
+    }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void listarProductosYUsuariosTest() {
+        List<Object[]> respuesta = productoRepo.listarProductosYUsuarios();
+
+        for(Object[] objeto:respuesta){
+            System.out.println(objeto[0]+"-----"+objeto[1]);
+        }
+    }
+
+    @Test
+    @Sql("classpath:datosUnishop.sql")
+    public void ListarPorDescuentoYdisponibilidadTest() {
+
+        List<Producto> respuesta = productoRepo.ListarPorDescuentoYdisponibilidad(02, 06);
+        respuesta.forEach(System.out::println);
+    }
+
+
 }

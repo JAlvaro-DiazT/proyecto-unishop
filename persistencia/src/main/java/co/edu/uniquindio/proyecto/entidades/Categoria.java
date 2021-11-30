@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -34,14 +31,15 @@ public class Categoria implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(length = 30)
     private String nombre;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "categoria")
     @ToString.Exclude
-    private List<Producto> miProducto;
+    private List<Producto> producto;
 
     public Categoria(Integer codigo, String nombre) {
         this.codigo = codigo;

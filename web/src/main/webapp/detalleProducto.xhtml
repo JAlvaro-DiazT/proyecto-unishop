@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">#{detalleProductoBean.producto.nombre}</ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+            <p>#{detalleProductoBean.producto}</p>
+        </div>
+
+        <div class="col-lg-5 col-md-1">
+            <div class="p-grid">
+                <div class="box">
+                    <p:graphicImage value="/uploads/#{detalleProductoBean.producto.imagenPrincipal}" class="img-fluid d-none d-md-block rounded mb-2 shadow "/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-md-1">
+            <div class="p-grid">
+                <div class="box">
+
+                     <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
+
+                    <h1 class="mt-4">#{detalleProductoBean.producto.precio}</h1>
+                    <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
+                        <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart" update="@form" action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal)}" />
+                        <p:growl for="add-cart" showDetail="true"/>
+                    </h:form>
+                </div>
+                <div class="box">
+                    <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombre}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <p:panel header="Comentarios" styleClass="mt-3">
+                <div class="blog-comment">
+                    <ul class="comments" >
+                        <p:dataList id="lista-com" value="#{detalleProductoBean.comentarios}" var="comentario" emptyMessage="No hay comentarios" type="definition">
+                            <li class="clearfix">
+                                <img src="/uploads/avatar.png" class="avatar" alt="" />
+                                <div class="post-comments">
+                                    <p class="meta">#{comentario.fechaEstilo} <a href="#">#{comentario.miUsuario.nombre}</a> dijo: <i class="pull-right" style="visibility: hidden"><a href="#"><small>Reply</small></a></i></p>
+                                    <p>#{comentario.mensaje}</p>
+                                    <p:rating readonly="true" value="#{comentario.calificacion}" />
+                                </div>
+
+                                <ul class="comments" jsf:rendered ="#{comentario.respuesta != null}">
+                                    <li class="clearfix">
+                                        <img src="/uploads/avatar.png" class="avatar" alt="" />
+                                        <div class="post-comments">
+                                            <p class="meta">#{comentario.fecha_comentario} <a href="#">#{comentario.miProducto.vendedor.nombre}</a> dijo: </p>
+                                            <p>#{comentario.respuesta}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </p:dataList>
+                    </ul>
+                </div>
+            </p:panel>
+        </div>
+
+        <div class="container">
+            <p:panel header="Hacer un comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}">
+
+                <h:form id="crear-comentario">
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <p:inputTextarea value="#{detalleProductoBean.nuevoComentario.mensaje}" required="true" styleClass="comentario-usuario" />
+                        <p:rating value="#{detalleProductoBean.nuevoComentario.calificacion}" required="true"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form, lista-com" styleClass="mt-4" action="#{detalleProductoBean.crearComentario}" />
+                    <p:growl for="msj-pregunta" showDetail="true" />
+                </h:form>
+            </p:panel>
+        </div>
+    </ui:define>
+
+</ui:composition>
+</html>

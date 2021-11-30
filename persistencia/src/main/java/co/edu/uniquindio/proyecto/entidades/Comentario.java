@@ -3,11 +3,10 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /*
     Entidad Comentario, como su nombre lo indica, representa el comentario que un usuario puede
@@ -34,21 +33,23 @@ public class Comentario implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer codigo;
 
-    @Column(length = 500)
+    @Lob
+    @NotBlank
+    @Column(nullable = false)
     private String mensaje;
 
+    @Lob
     @Column(length = 500)
     private String respuesta;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false)
     private LocalDateTime fecha_comentario;
 
     @Column(nullable = false)
-    @Positive
-    @Max(5)
-    @Min(1)
+    @PositiveOrZero
     private int calificacion;
 
     @ManyToOne
@@ -58,4 +59,8 @@ public class Comentario implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario miUsuario;
+
+    public String getFechaEstilo(){
+        return fecha_comentario.format( DateTimeFormatter.ISO_DATE );
+    }
 }
