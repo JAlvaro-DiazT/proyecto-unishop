@@ -40,6 +40,9 @@ public class SeguridadBean implements Serializable {
     private ProductoServicio productoServicio;
 
     @Autowired
+    private CompraServicio compraServicio;
+
+    @Autowired
     private EmpresaMensajeriaServicio empresaMensajeriaServicio;
 
     @Getter @Setter
@@ -55,6 +58,9 @@ public class SeguridadBean implements Serializable {
     private List<MedioPago> medioPagos;
 
     @Getter @Setter
+    private List<EmpresaMensajeria> empresaMensajerias;
+
+    @Getter @Setter
     private Compra compra;
 
     @PostConstruct
@@ -63,6 +69,7 @@ public class SeguridadBean implements Serializable {
         this.subtotal = 0F;
         this.productosCarrito = new ArrayList<>();
         medioPagos=medioPagoServicio.listarMediosPagos();
+        empresaMensajerias=empresaMensajeriaServicio.listarEmpresasMensajerias();
     }
 
     public String iniciarSesion(){
@@ -110,15 +117,13 @@ public class SeguridadBean implements Serializable {
     public void comprar(){
         if(usuarioSesion!=null && !productosCarrito.isEmpty()){
             try {
-                EmpresaMensajeria empresaMensajeria = empresaMensajeriaServicio.obtenerEmpresa(1);
-                MedioPago medioPago=medioPagoServicio.obtenerMedioPago(2);
-                compra.setFecha_compra( LocalDateTime.now( ZoneId.of("America/Bogota") ) );
+               compra.setFecha_compra( LocalDateTime.now( ZoneId.of("America/Bogota") ) );
                 compra.setMiUsuario(usuarioSesion);
-                compra.setMiEmpresaMensajeria(empresaMensajeria);
-                compra.setMedio_pago(medioPago);
 
+                //compraServicio.comprarProducto(compra);
 
-               productoServicio.comprarProductos(productosCarrito, compra);
+                productoServicio.comprarProductos(productosCarrito, compra);
+                compra=new Compra();
                 productosCarrito.clear();
                 subtotal = 0F;
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada satisfactoriamente");

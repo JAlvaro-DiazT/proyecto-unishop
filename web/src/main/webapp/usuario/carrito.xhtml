@@ -61,15 +61,7 @@
                         <h1 jsf:id="subtotal-carrito">$#{seguridadBean.subtotal}</h1>
 
                     </div>
-                    <div>
-                        <h4>Medio de pago:</h4>
-                        <p:outputLabel for="medio_pago_c" />
-                        <p:selectOneMenu id="medio_pago_c" value="#{seguridadBean.compra.medio_pago}" converter="#{medioPagoConverter}">
-                            <f:selectItem itemLabel="Seleccione un medio de pago" noSelectionOption="true" />
-                            <f:selectItems value="#{seguridadBean.medioPagos}" var="medioPago" itemLabel="#{medioPago.nombre}"/>
-                        </p:selectOneMenu>
-                        <p:message for="medio_pago_c" />
-                    </div>
+
                 </h:form>
             </div>
         </div>
@@ -77,7 +69,31 @@
 
 
             <h:form styleClass="text-center">
-                <p:commandButton value="Comprar" update="@form" icon="pi pi-check" action="#{seguridadBean.comprar}" />
+                <div>
+
+
+                    <h4>Medio de pago:</h4>
+                    <p:outputLabel for="medio_pago_c"/>
+                    <p:selectOneMenu id="medio_pago_c" value="#{seguridadBean.compra.medio_pago}"
+                                     converter="#{medioPagoConverter}">
+                        <f:selectItem itemLabel="Seleccione un medio de pago" noSelectionOption="true"/>
+                        <f:selectItems value="#{seguridadBean.medioPagos}" var="medioPago"
+                                       itemLabel="#{medioPago.nombre}"/>
+                    </p:selectOneMenu>
+                    <p:message for="medio_pago_c"/>
+
+                    <h4>Empresa de mensajeria:</h4>
+                    <p:outputLabel for="empresa_mensajeria_c"/>
+                    <p:selectOneMenu id="empresa_mensajeria_c" value="#{seguridadBean.compra.miEmpresaMensajeria}"
+                                     converter="#{empresaMensajeriaConverter}">
+                        <f:selectItem itemLabel="Seleccione una empresa de mensajeria" noSelectionOption="true"/>
+                        <f:selectItems value="#{seguridadBean.empresaMensajerias}" var="mensajeria"
+                                       itemLabel="#{mensajeria.nombre}"/>
+                    </p:selectOneMenu>
+                    <p:message for="empresa_mensajeria_c"/>
+                </div>
+
+                <p:commandButton value="Comprar" update="@form" icon="pi pi-check" action="#{seguridadBean.comprar}"/>
                 <p:growl for="compra-msj" showDetail="true"/>
             </h:form>
         </div>
