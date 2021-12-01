@@ -49,7 +49,7 @@
 
                                     <h:outputText value="Categorias:" />
                                     <p:repeat value="#{producto.categoria}" var="categorias" converter="#{categoriaConverter}">
-                                        <h:outputText value="#{producto.categoria}" itemLabel="#{categorias.nombre}"/>
+                                        <h:outputText value="- #{categorias.nombre}" itemLabel="#{categorias.nombre}"/>
                                     </p:repeat>
 
                                 </h:panelGrid>
