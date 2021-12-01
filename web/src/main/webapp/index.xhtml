@@ -47,11 +47,10 @@
                                     <h:outputText value="$#{producto.precio}" />
 
 
-                                    <p:outputLabel value="Categorias" for="categorias_p" />
-                                    <p:selectManyMenu id="categorias_p" value="#{producto.categoria}"  converter="#{categoriaConverter}">
-                                        <f:selectItems value="#{producto.categoria}" var="categorias" itemLabel="#{categorias.nombre}"/>
-                                    </p:selectManyMenu>
-                                    <p:message for="categorias_p" />
+                                    <h:outputText value="Categorias:" />
+                                    <p:repeat value="#{producto.categoria}" var="categorias" converter="#{categoriaConverter}">
+                                        <h:outputText value="#{producto.categoria}" itemLabel="#{categorias.nombre}"/>
+                                    </p:repeat>
 
                                 </h:panelGrid>
                             </p:outputPanel>

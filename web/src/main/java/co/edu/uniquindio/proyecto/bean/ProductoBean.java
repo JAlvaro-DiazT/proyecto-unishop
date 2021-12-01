@@ -1,13 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Ciudad;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.servicios.CategoriaServicio;
-import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
-import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.IOUtils;
@@ -48,6 +42,9 @@ public class ProductoBean implements Serializable {
     @Autowired
     private CiudadServicio ciudadServicio;
 
+    @Autowired
+    private SeguroServicio seguroServicio;
+
     private ArrayList<String> imagenes;
 
     @Getter @Setter
@@ -55,6 +52,9 @@ public class ProductoBean implements Serializable {
 
     @Getter @Setter
     private List<Ciudad> ciudades;
+
+    @Getter @Setter
+    private List<Seguro> seguros;
 
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
@@ -69,6 +69,7 @@ public class ProductoBean implements Serializable {
         this.imagenes = new ArrayList<>();
         categorias = categoriaServicio.listarCategorias();
         ciudades = ciudadServicio.listarCiudades();
+        seguros = seguroServicio.listarSeguros();
     }
 
     public void crearProducto(){

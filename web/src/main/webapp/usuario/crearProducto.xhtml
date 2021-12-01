@@ -44,6 +44,13 @@
                     </p:selectOneMenu>
                     <p:message for="ciudad_p" />
 
+                    <p:outputLabel value="Seguro" for="seguro_p" />
+                    <p:selectOneMenu id="seguro_p" value="#{productoBean.producto.seguro}" converter="#{seguroConverter}">
+                        <f:selectItem itemLabel="Seleccione un seguro" noSelectionOption="true" />
+                        <f:selectItems value="#{productoBean.seguros}" var="seguro" itemLabel="#{seguro.descripcion}"/>
+                    </p:selectOneMenu>
+                    <p:message for="seguro_p" />
+
                     <p:outputLabel value="Imagenes" for="imagen_p" />
                     <p:fileUpload id="imagen_p" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
                     <p:message for="imagen_p" />
