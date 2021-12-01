@@ -38,8 +38,8 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fecha_compra;
 
-    @Column(length = 30)
-    private String medio_pago;
+    @ManyToOne
+    private MedioPago medio_pago;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -49,14 +49,14 @@ public class Compra implements Serializable {
     @ToString.Exclude
     private List<DetalleCompra> miDetalleCompra;
 
-    @OneToOne
+    @ManyToOne
     private EmpresaMensajeria miEmpresaMensajeria;
 
-    public Compra(Integer codigo, LocalDateTime fecha_compra, String medio_pago, Usuario miUsuario,EmpresaMensajeria miEmpresaMensajeria) {
+    public Compra(Integer codigo, LocalDateTime fecha_compra, MedioPago medio_pago, Usuario miUsuario, EmpresaMensajeria miEmpresaMensajeria) {
         this.codigo = codigo;
         this.fecha_compra = fecha_compra;
         this.medio_pago = medio_pago;
         this.miUsuario = miUsuario;
-        this.miEmpresaMensajeria =miEmpresaMensajeria;
+        this.miEmpresaMensajeria = miEmpresaMensajeria;
     }
 }

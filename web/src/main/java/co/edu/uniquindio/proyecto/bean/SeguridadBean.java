@@ -1,14 +1,13 @@
 package co.edu.uniquindio.proyecto.bean;
 
+import co.edu.uniquindio.proyecto.converter.MedioPagoConverter;
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
-import co.edu.uniquindio.proyecto.entidades.EmpresaMensajeria;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.servicios.EmpresaMensajeriaServicio;
-import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.List;
 
 @Scope("session")
 @Component
@@ -46,10 +48,21 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private Float subtotal;
 
+    @Autowired
+    private MedioPagoServicio medioPagoServicio;
+
+    @Getter @Setter
+    private List<MedioPago> medioPagos;
+
+    @Getter @Setter
+    private Compra compra;
+
     @PostConstruct
     public void inicializar(){
+        this.compra = new Compra();
         this.subtotal = 0F;
         this.productosCarrito = new ArrayList<>();
+        medioPagos=medioPagoServicio.listarMediosPagos();
     }
 
     public String iniciarSesion(){
@@ -98,12 +111,20 @@ public class SeguridadBean implements Serializable {
         if(usuarioSesion!=null && !productosCarrito.isEmpty()){
             try {
                 EmpresaMensajeria empresaMensajeria = empresaMensajeriaServicio.obtenerEmpresa(1);
-                productoServicio.comprarProductos(usuarioSesion,productosCarrito, "PSE", empresaMensajeria);
+                MedioPago medioPago=medioPagoServicio.obtenerMedioPago(2);
+                compra.setFecha_compra( LocalDateTime.now( ZoneId.of("America/Bogota") ) );
+                compra.setMiUsuario(usuarioSesion);
+                compra.setMiEmpresaMensajeria(empresaMensajeria);
+                compra.setMedio_pago(medioPago);
+
+
+               productoServicio.comprarProductos(productosCarrito, compra);
                 productosCarrito.clear();
                 subtotal = 0F;
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada satisfactoriamente");
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
             } catch (Exception e) {
+
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
 

@@ -32,6 +32,5 @@ public interface ProductoServicio {
     List<Producto> buscarProductos(String nombre, String[] filtros);
 
     List<Producto> listarProducto(String codigoUsuario) throws Exception;
-
-    Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago, EmpresaMensajeria empresaMensajeria) throws Exception;
+    Compra comprarProductos(ArrayList<ProductoCarrito> productos,Compra compra) throws Exception;
 }

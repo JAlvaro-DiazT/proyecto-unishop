@@ -59,11 +59,23 @@
                     <div class="text-end">
                         <h4>Subtotal:</h4>
                         <h1 jsf:id="subtotal-carrito">$#{seguridadBean.subtotal}</h1>
+
+                    </div>
+                    <div>
+                        <h4>Medio de pago:</h4>
+                        <p:outputLabel for="medio_pago_c" />
+                        <p:selectOneMenu id="medio_pago_c" value="#{seguridadBean.compra.medio_pago}" converter="#{medioPagoConverter}">
+                            <f:selectItem itemLabel="Seleccione un medio de pago" noSelectionOption="true" />
+                            <f:selectItems value="#{seguridadBean.medioPagos}" var="medioPago" itemLabel="#{medioPago.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:message for="medio_pago_c" />
                     </div>
                 </h:form>
             </div>
         </div>
         <div class="row mt-4 d-flex">
+
+
             <h:form styleClass="text-center">
                 <p:commandButton value="Comprar" update="@form" icon="pi pi-check" action="#{seguridadBean.comprar}" />
                 <p:growl for="compra-msj" showDetail="true"/>

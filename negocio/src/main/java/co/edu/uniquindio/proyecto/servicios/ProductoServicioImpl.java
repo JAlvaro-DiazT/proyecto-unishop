@@ -9,6 +9,7 @@ import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -102,15 +103,10 @@ public class ProductoServicioImpl implements ProductoServicio{
         return null;
     }
 
-    @Override
-    public Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago, EmpresaMensajeria empresaMensajeria) throws Exception {
-        try {
-            Compra compra = new Compra();
-            compra.setFecha_compra( LocalDateTime.now( ZoneId.of("America/Bogota") ) );
-            compra.setMiUsuario(usuario);
-            compra.setMedio_pago(medioPago);
 
-            compra.setMiEmpresaMensajeria(empresaMensajeria);
+    @Override
+    public Compra comprarProductos( ArrayList<ProductoCarrito> productos,Compra compra) throws Exception {
+        try {
 
             Compra compraGuardada = compraRepo.save(compra);
 

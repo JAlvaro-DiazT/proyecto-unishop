@@ -54,7 +54,7 @@ public class CompraTest {
         //Obtener una empresa de mensajeria ya registrada
         EmpresaMensajeria empresaMensajeria =  empresaMensajeriaRepo.findById(2000).orElse(null);
 
-        Compra compra=  new Compra(0005, LocalDateTime.now(),"Credito",miUsuario,empresaMensajeria);
+        Compra compra=  new Compra(0005, LocalDateTime.now(),null,miUsuario,empresaMensajeria);
         Compra compraGuardada= compraRepo.save(compra);
         Assertions.assertNotNull(compraGuardada);
     }
@@ -76,14 +76,14 @@ public class CompraTest {
     public void actualizarTest() {
 
         Compra compra = compraRepo.findById(0002).orElse(null);
-        compra.setMedio_pago("Debito");
+        compra.setCodigo(0002);
         //Se guarda la modificación
         compraRepo.save(compra);
 
         Compra compraBuscada = compraRepo.findById(0002).orElse(null);
 
         //Se busca que si haya quedado en el registro el cambio
-        Assertions.assertEquals("Debito",compraBuscada.getMedio_pago());
+        Assertions.assertEquals(0002,compraBuscada.getCodigo());
 
     }
 

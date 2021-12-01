@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /*
     Entidad EmpresaMensajeria, representa la empresa por medio de la cual el producto es enviado al cliente y
@@ -39,9 +40,9 @@ public class EmpresaMensajeria implements Serializable {
     @Column(length = 10)
     private String telefono;
 
-    @OneToOne(mappedBy = "miEmpresaMensajeria")
+    @OneToMany(mappedBy = "miEmpresaMensajeria")
     @ToString.Exclude
-    private Compra miCompra;
+    private List<Compra> miCompra;
 
     public EmpresaMensajeria(Integer codigo, String nombre, String telefono) {
         this.codigo = codigo;
