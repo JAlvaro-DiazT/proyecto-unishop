@@ -13,17 +13,29 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad Administrador.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
-public class AdministradorTest
-{
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class AdministradorTest {
+
     @Autowired
     private AdministradorRepo administradorRepo;
 
     @Test // programa de tipo test para ingresar un administrador
     @Sql("classpath:datosUnishop.sql")
-    public void RegistrarTest()
-    {
+    public void RegistrarTest() {
+
         Administrador administrador=  new Administrador(002,"Carolina","correo@mail.com", "13332");
         Administrador adminGuardado= administradorRepo.save(administrador);
         Assertions.assertNotNull(adminGuardado);
@@ -31,9 +43,9 @@ public class AdministradorTest
 
     @Test // programa de tipo test para eliminar un administrador
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
-        //borramos el usuario buscando por codigo
+    public void eliminarTest() {
+
+        //borramos el administrador buscando por codigo
         administradorRepo.deleteById(003);
         //busco el administrador para verificar su lo borro
 
@@ -44,14 +56,13 @@ public class AdministradorTest
 
     @Test // programa de tipo test para actualizar un administrador
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         Administrador administrador = administradorRepo.findById(004).orElse(null);
         administrador.setNombre("Duvan Molina");
         //Se guarda la modificación
         administradorRepo.save(administrador);
 
-        //Busco la ciudad
         Administrador adminBuscado = administradorRepo.findById(004).orElse(null);
 
         //Se busca que si haya quedado en el registro el cambio
@@ -59,14 +70,12 @@ public class AdministradorTest
 
     }
 
-
     @Test // programa de tipo test para listar los administradores creados
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<Administrador> administradores =administradorRepo.findAll();
         administradores.forEach(Administrador -> System.out.println(Administrador));
-
     }
 
 }

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Unishop | <ui:insert name="title">Plantilla</ui:insert></title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="styles.css" />
+    <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+</h:head>
+<h:body>
+
+    <div id="header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <span class="pi pi-shopping-cart" style="font-size: 2rem; margin-right: 10px"/>
+                        <span class="fs-4">Unishop</span>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small" style="text-align: center">
+                        <li>
+                            <a href="/" class="nav-link text-white" >
+                                <i class="pi pi-home bi d-block mx-auto mb-1 icon-menu" ></i>
+                                Inicio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/" class="nav-link text-white" >
+                                <i class="pi pi-tags bi d-block mx-auto mb-1 icon-menu" ></i>
+                                Categorias
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/crearProducto.xhtml" class="nav-link text-white">
+                                <i class="pi pi-save bi d-block mx-auto mb-1 icon-menu"></i>
+                                Crear producto
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/misProductos.xhtml" class="nav-link text-white">
+                                <i class="pi pi-list bi d-block mx-auto mb-1 icon-menu"></i>
+                                Mis productos
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/comprasUsuario.xhtml" class="nav-link text-white">
+                                <i class="pi pi-dollar bi d-block mx-auto mb-1 icon-menu"></i>
+                                Compras
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/perfil.xhtml" class="nav-link text-white">
+                                <i class="pi pi-user bi d-block mx-auto mb-1 icon-menu"></i>
+                                Perfil
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/carrito.xhtml" class="nav-link text-white">
+                                <i class="pi pi-shopping-cart bi d-block mx-auto mb-1 icon-menu"></i>
+                                Carrito
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="px-3 py-2 border-bottom mb-3">
+            <div class="container d-flex flex-wrap justify-content-center">
+                <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto input-search ui-inputgroup">
+                    <h:form>
+                        <p:inputText style="width: 300px" placeholder="¿Que producto esta buscando?" required="true" value="#{busquedaBean.busqueda}"/>
+                        <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form"/>
+                    </h:form>
+                </div>
+
+
+                <div class="text-end">
+                    <h:form rendered="#{!seguridadBean.autenticado}">
+                        <p:commandButton value="Login" styleClass="btn btn-primary me-2" onclick="PF('login').show()" icon="pi pi-sign-in"/>
+                        <p:commandButton value="Registrarse" styleClass="btn btn-primary" action="registrarUsuario?faces-redirect=true" icon="pi pi-user-plus"/>
+                    </h:form>
+                    <div id="info-sesion" jsf:rendered="#{seguridadBean.autenticado}">
+                        <h5>Bienvenido, #{seguridadBean.usuarioSesion.nombre}</h5>
+                        <h:form>
+                            <p:commandButton value="Cerrar sesion" styleClass="btn btn-primary" action="#{seguridadBean.cerrarSesion}" icon="pi pi-sign-out"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true" rendered="#{!seguridadBean.autenticado}">
+    <h:form >
+        <h:panelGrid columns="3" cellpadding="5">
+            <p:outputLabel for="email_login" value="Email:" />
+            <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
+            <p:message for="email_login" />
+
+            <p:outputLabel for="password_login" value="Password:" />
+            <p:password id="password_login" value="#{seguridadBean.password}" required="true"/>
+            <p:message for="password_login" />
+        </h:panelGrid>
+        <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}" styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+        <p:growl for="login-bean" showDetail="true" />
+    </h:form>
+    </p:dialog>
+
+
+    <div id="content">
+        <div class="container">
+            <ui:insert name="content">Contenido del documento</ui:insert>
+        </div>
+
+
+    </div>
+
+    <div id="footer" class="footer mt-5">
+        <ui:insert name="footer">
+            <div class="py-4 bg-light" align="center">
+                <div class="justify-content-center" >
+                    <div class="col-10" >
+                        <span>Universidad del Quindío - Programación avanzada - 2021</span>
+                    </div>
+                </div>
+            </div>
+        </ui:insert>
+    </div>
+
+</h:body>
+</html>

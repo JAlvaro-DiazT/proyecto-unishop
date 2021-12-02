@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Registrar usuario</ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Registrar usuario" >
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+
+                    <p:outputLabel value="Codigo" for="codigo_u" />
+                    <p:inputText id="codigo_u" value="#{usuarioBean.usuario.codigo}" required="true"/>
+                    <p:message for="codigo_u" />
+
+                    <p:outputLabel value="Nombre" for="nombre_u" />
+                    <p:inputText id="nombre_u" value="#{usuarioBean.usuario.nombre}" required="true"/>
+                    <p:message for="nombre_u" />
+
+                    <p:outputLabel value="Email" for="email_u" />
+                    <p:inputText id="email_u" value="#{usuarioBean.usuario.email}" required="true"/>
+                    <p:message for="email_u" />
+
+                    <p:outputLabel value="Ciudad" for="ciudad_u" />
+                    <p:selectOneMenu id="ciudad_u" value="#{usuarioBean.usuario.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" />
+                        <f:selectItems value="#{usuarioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}"/>
+                    </p:selectOneMenu>
+                    <p:message for="ciudad_u" />
+
+                    <p:outputLabel value="Username" for="username_u" />
+                    <p:inputText id="username_u" value="#{usuarioBean.usuario.username}" required="true"/>
+                    <p:message for="username_u" />
+
+                    <p:outputLabel value="Password" for="password_u" />
+                    <p:password id="password_u" value="#{usuarioBean.usuario.password}" required="true"/>
+                    <p:message for="password_u" />
+
+                </h:panelGrid>
+                <p:growl showDetail="true" for="msj-bean"/>
+                <p:commandButton value="Registrar usuario" action="#{usuarioBean.registrarUsuario}" update="@form" icon="pi pi-user-plus"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
+</html>

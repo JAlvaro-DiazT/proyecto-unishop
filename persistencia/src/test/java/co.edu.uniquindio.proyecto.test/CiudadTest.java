@@ -12,6 +12,18 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+/*
+    Clase por medio de la cual se van a realizar las pruebas de las funciones de: Registrar, Eliminar,
+    Actualizar y Listar de la entidad Ciudad.
+
+    La anotacion @DataJpaTest indica que es una clase para probar datos
+    La anotacion @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) para que
+    los datos de la prueba se guarde en la base de datos
+    La anotacion @Autowired inicializa las variables que representan componentes de SpringBoot
+    La anotacion @Test permite ejecutar las pruebas
+    La anotacion @Sql("classpath:datosUnishop.sql") por medio del cual se realiza la conexion a los
+    recursos del archivo Sql
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //para que se guarde en la base
 public class CiudadTest {
@@ -20,8 +32,8 @@ public class CiudadTest {
 
     @Test // programa de tipo test para ingresar una ciudad
     @Sql("classpath:datosUnishop.sql")
-    public void registrarTest()
-    {
+    public void registrarTest() {
+
         Ciudad ciudad=  new Ciudad(5,"Armenia");
         Ciudad ciudadGuardada= ciudadRepo.save(ciudad);
         Assertions.assertNotNull(ciudadGuardada);
@@ -29,11 +41,11 @@ public class CiudadTest {
 
     @Test // programa de tipo test para eliminar una ciudad
     @Sql("classpath:datosUnishop.sql")
-    public void eliminarTest()
-    {
+    public void eliminarTest() {
+
         //borramos la ciudad buscando por codigo
         ciudadRepo.deleteById(2);
-        //Se busca la ciudad para verificar su lo borro
+        //Se busca la ciudad para verificar si lo borro
 
         Ciudad ciudadBuscada = ciudadRepo.findById(2).orElse(null);
         // para decir que lo que espero es un null
@@ -42,8 +54,8 @@ public class CiudadTest {
 
     @Test // programa de tipo test para actualizar una ciudad
     @Sql("classpath:datosUnishop.sql")
-    public void actualizarTest()
-    {
+    public void actualizarTest() {
+
         Ciudad ciudadGuardada = ciudadRepo.findById(3).orElse(null);
         ciudadGuardada.setNombre("Pereira");
         //Se guarda la modificación
@@ -54,16 +66,14 @@ public class CiudadTest {
 
         //Se busca que si haya quedado en el registro el cambio
         Assertions.assertEquals("Pereira",ciudadBuscada.getNombre());
-
     }
 
 
     @Test // programa de tipo test para listar las ciudades creadas
     @Sql("classpath:datosUnishop.sql")
-    public void ListarTest()
-    {
+    public void ListarTest() {
+
         List<Ciudad> ciudades =ciudadRepo.findAll();
         ciudades.forEach(ciudad -> System.out.println(ciudad));
-
     }
 }
