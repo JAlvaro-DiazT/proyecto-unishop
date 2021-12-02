@@ -47,10 +47,8 @@
                                     <h:outputText value="$#{producto.precio}" />
 
 
-                                    <h:outputText value="Categorias:" />
-                                    <p:repeat value="#{producto.categoria}" var="categorias" converter="#{categoriaConverter}">
-                                        <h:outputText value="- #{categorias.nombre}" itemLabel="#{categorias.nombre}"/>
-                                    </p:repeat>
+
+
 
                                 </h:panelGrid>
                             </p:outputPanel>

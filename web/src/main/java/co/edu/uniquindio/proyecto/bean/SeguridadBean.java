@@ -63,6 +63,9 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private Compra compra;
 
+    @Getter @Setter
+    private List<Producto> productoCodig;
+
     @PostConstruct
     public void inicializar(){
         this.compra = new Compra();
@@ -70,6 +73,12 @@ public class SeguridadBean implements Serializable {
         this.productosCarrito = new ArrayList<>();
         medioPagos=medioPagoServicio.listarMediosPagos();
         empresaMensajerias=empresaMensajeriaServicio.listarEmpresasMensajerias();
+        try {
+            productoCodig = productoServicio.listarProductoPorCodigo(usuarioSesion.getCodigo());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String iniciarSesion(){

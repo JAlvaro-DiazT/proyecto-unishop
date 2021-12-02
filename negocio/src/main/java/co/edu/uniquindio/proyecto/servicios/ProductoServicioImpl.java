@@ -126,4 +126,9 @@ public class ProductoServicioImpl implements ProductoServicio{
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<Producto> listarProductoPorCodigo(Integer codigoUsuario)throws Exception {
+         return productoRepo.listarPorCodigo(codigoUsuario);
+    }
 }
