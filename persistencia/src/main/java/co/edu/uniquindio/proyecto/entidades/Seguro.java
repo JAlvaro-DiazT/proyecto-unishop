@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /*
     Entidad Seguro, representa el seguro con el que el producto cuenta y el usuario define el periodo de tiempo
@@ -47,9 +48,9 @@ public class Seguro implements Serializable {
     @Positive
     private float valor;
 
-    @OneToOne(mappedBy = "seguro")
+    @OneToMany(mappedBy = "seguro")
     @ToString.Exclude
-    private Producto miProducto;
+    private List<Producto> miProducto;
 
     public Seguro(Integer codigo, String descripcion, LocalDateTime fecha_inicio, LocalDateTime fecha_vencimiento, float valor) {
         this.codigo = codigo;

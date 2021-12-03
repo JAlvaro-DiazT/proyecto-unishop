@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <h5 class="card-title">#{producto.nombre}</h5>
                             <p class="card-text">$#{producto.precio}</p>
-                            <hr />
+
                             <p:commandButton value="Ver detalle" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irADetaller(producto.codigo)}"/>
 
                         </div>
@@ -45,12 +45,6 @@
 
                                     <h:outputText value="Precio:" />
                                     <h:outputText value="$#{producto.precio}" />
-
-
-                                    <h:outputText value="Categorias:" />
-                                    <p:repeat value="#{producto.categoria}" var="categorias" converter="#{categoriaConverter}">
-                                        <h:outputText value="- #{categorias.nombre}" itemLabel="#{categorias.nombre}"/>
-                                    </p:repeat>
 
                                 </h:panelGrid>
                             </p:outputPanel>
