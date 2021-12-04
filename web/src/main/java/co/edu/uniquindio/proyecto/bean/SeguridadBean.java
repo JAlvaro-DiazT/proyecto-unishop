@@ -85,7 +85,7 @@ public class SeguridadBean implements Serializable {
     @Value("#{param['compra']}")
     private Integer codigoCompra;
 
-    private int total;
+    private float subTotal;
 
     @PostConstruct
     public void inicializar(){
@@ -224,14 +224,16 @@ public class SeguridadBean implements Serializable {
             try{
                 this.detalleCompras = (ArrayList<DetalleCompra>) detalleCompraServicio.listarDetallesCompra(codigoCompra);
                 comprasUsuario.forEach(System.out::println);
+                calcularSubTotal();
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
     public void calcularSubTotal(){
-        total= (int) (detalleCompras.get(codigoCompra).getUnidades()*detalleCompras.get(codigoCompra).getPrecio_producto());
-
-
+        subTotal=0F;
+        for (DetalleCompra detalle:detalleCompras) {
+            subTotal+=detalle.getUnidades()*detalle.getPrecio_producto();
+        }
     }
 }
