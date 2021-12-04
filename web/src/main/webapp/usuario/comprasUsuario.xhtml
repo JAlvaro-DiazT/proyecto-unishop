@@ -11,6 +11,58 @@
     <ui:define name="title">Carrito</ui:define>
 
     <ui:define name="content">
+        <h:form>
+            <p>#{seguridadBean.obtenerComprasUsuario()}</p>
+            <p:dataView value="#{seguridadBean.comprasUsuario}" var="compra" gridIcon="pi pi-th-large"
+                        listIcon="pi pi-bars">
+                <p:dataViewGridItem>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">#{compra.codigo}</h5>
+                            <h5 class="card-title">#{compra.fecha_compra}</h5>
+                            <p class="card-text">#{compra.medio_pago}</p>
+
+                            <p:commandButton value="Detalle Compra" icon="pi pi-dollar" update="@form"
+                                             action="#{seguridadBean.mostrarDetalleCompra(compra.codigo)}"/>
+                            <p:growl for="subastarMensaje" showDetail="true"/>
+
+                        </div>
+                    </div>
+                </p:dataViewGridItem>
+
+                <p:dataViewListItem>
+                    <div class="row d-flex item-pro">
+
+                        <div class="col-lg-8 col-md-1 align-self-center">
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Codigo:"/>
+                                    <h:outputText value="#{compra.codigo}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Fecha de compra:"/>
+                                    <h:outputText value="#{compra.fecha_compra}"/>
+
+                                    <h:outputText value="Medio de pago"/>
+                                    <h:outputText value="#{compra.medio_pago}"/>
+
+
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+
+                        <div class="col-lg-2 col-md-1 align-self-center">
+
+                            <p:commandButton value="Detalle Compra" icon="pi pi-dollar" update="@form"
+                                             action="#{seguridadBean.mostrarDetalleCompra(compra.codigo)}"/>
+                            <p:growl for="subastarMensaje" showDetail="true"/>
+
+                        </div>
+
+                    </div>
+                </p:dataViewListItem>
+
+            </p:dataView>
+        </h:form>
 
     </ui:define>
 

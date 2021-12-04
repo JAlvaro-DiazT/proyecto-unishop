@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.el.MethodExpression;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
@@ -43,6 +44,9 @@ public class SeguridadBean implements Serializable {
     private CompraServicio compraServicio;
 
     @Autowired
+    private DetalleCompraServicio detalleCompraServicio;
+
+    @Autowired
     private EmpresaMensajeriaServicio empresaMensajeriaServicio;
 
     @Getter @Setter
@@ -64,16 +68,22 @@ public class SeguridadBean implements Serializable {
     private Compra compra;
 
     @Getter @Setter
-    private List<Producto> productoCodig;
+    private  ArrayList<Producto> misProductos;
 
     @Getter @Setter
-    private  ArrayList<Producto> misProductos;
+    private  ArrayList<Compra> comprasUsuario;
 
     @Getter @Setter
     private ArrayList<Producto> productoSubasta;
 
     @Getter @Setter
+    private ArrayList<DetalleCompra> detalleCompras;
+
+    @Getter @Setter
     private Subasta subasta;
+
+    @Value("#{param['compra']}")
+    private Integer codigoCompra;
 
     @PostConstruct
     public void inicializar(){
@@ -81,12 +91,11 @@ public class SeguridadBean implements Serializable {
         this.subtotal = 0F;
         this.productosCarrito = new ArrayList<>();
         this.productoSubasta = new ArrayList<>();
+        this.comprasUsuario = new ArrayList<>();
+        this.detalleCompras = new ArrayList<>();
         this.subasta = new Subasta();
-        medioPagos=medioPagoServicio.listarMediosPagos();
-        empresaMensajerias=empresaMensajeriaServicio.listarEmpresasMensajerias();
-
-
-
+        medioPagos = medioPagoServicio.listarMediosPagos();
+        empresaMensajerias = empresaMensajeriaServicio.listarEmpresasMensajerias();
     }
 
     public String iniciarSesion(){
@@ -159,16 +168,13 @@ public class SeguridadBean implements Serializable {
         }
     }
 
-    public void obtenerMisProductos()
-    {
-        if(usuarioSesion!=null)
-        {
-            try
-            {
+    public void obtenerMisProductos() {
+
+        if(usuarioSesion!=null) {
+            try {
                 this.misProductos= (ArrayList<Producto>) productoServicio.listarMisProductos(usuarioSesion);
 
-            }catch (Exception e)
-            {
+            }catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -176,7 +182,6 @@ public class SeguridadBean implements Serializable {
     public void subastar(Producto miProducto){
 
         if( !productoSubasta.contains(miProducto) ){
-
 
             try {
                 productoSubasta.add(miProducto);
@@ -189,8 +194,37 @@ public class SeguridadBean implements Serializable {
 
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto subastado con exito");
             FacesContext.getCurrentInstance().addMessage("subastarMensaje", fm);
+        } else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "El producto ya esta en subasta");
+            FacesContext.getCurrentInstance().addMessage("subastarMensaje", fm);
         }
-
     }
 
+    public void obtenerComprasUsuario(){
+        if(usuarioSesion!=null){
+            try{
+                this.comprasUsuario = (ArrayList<Compra>) compraServicio.listarComprasUsuario(usuarioSesion.getCodigo());
+                comprasUsuario.forEach(System.out::println);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public String mostrarDetalleCompra(Integer codigo) {
+
+        return "detalleCompra?faces-redirect=true&amp;compra="+codigo;
+    }
+
+    public void listarDetalleCompra(){
+        if(usuarioSesion!=null){
+            try{
+                this.detalleCompras = detalleCompraServicio.listarDetallesCompra(codigoCompra);
+                comprasUsuario.forEach(System.out::println);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

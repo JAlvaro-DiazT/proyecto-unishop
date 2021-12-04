@@ -135,14 +135,12 @@ public class ProductoServicioImpl implements ProductoServicio{
 
 
     @Override
-    public List<Producto> listarMisProductos(Usuario usuarioSesion) throws Exception
-    {
+    public List<Producto> listarMisProductos(Usuario usuarioSesion) throws Exception {
        return productoRepo.listarProductosUsuario(usuarioSesion.getCodigo());
     }
 
     @Override
-    public Subasta agregarSubasta(Subasta subasta) throws Exception
-    {
+    public Subasta agregarSubasta(Subasta subasta) throws Exception {
           return subastaRepo.save(subasta);
     }
 }
