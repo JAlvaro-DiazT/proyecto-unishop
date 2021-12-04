@@ -118,9 +118,15 @@ public class ProductoServicioImpl implements ProductoServicio{
                 dc.setUnidades(p.getUnidades());
                 dc.setMiProducto( productoRepo.findById(p.getId()).get() );
 
-                detalleCompraRepo.save(dc);
-            }
+                Integer disponibles = productoRepo.obtenerTotalUnidadesDisponibles(p.getId());
 
+                if(productoRepo.findById(p.getId()).get().getUnidades() <= disponibles){
+                    detalleCompraRepo.save(dc);
+                }else{
+                    compraRepo.delete(compra);
+                    compraGuardada = null;
+                }
+            }
             return compraGuardada;
         }catch (Exception e){
             throw new Exception(e.getMessage());

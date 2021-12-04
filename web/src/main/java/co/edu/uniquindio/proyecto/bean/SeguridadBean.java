@@ -126,13 +126,18 @@ public class SeguridadBean implements Serializable {
     public void comprar(){
         if(usuarioSesion!=null && !productosCarrito.isEmpty()){
             try {
-               compra.setFecha_compra( LocalDateTime.now( ZoneId.of("America/Bogota") ) );
-                compra.setMiUsuario(usuarioSesion);
 
-                //compraServicio.comprarProducto(compra);
+                EmpresaMensajeria empresaMensajeria = compra.getMiEmpresaMensajeria();
+                MedioPago medioPago = compra.getMedio_pago();
+                compra.setFecha_compra( LocalDateTime.now( ZoneId.of("America/Bogota") ) );
+                compra.setMiUsuario(usuarioSesion);
+                compra.setMiEmpresaMensajeria(empresaMensajeria);
+                compra.setMedio_pago(medioPago);
+
 
                 productoServicio.comprarProductos(productosCarrito, compra);
                 compra=new Compra();
+
                 productosCarrito.clear();
                 subtotal = 0F;
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada satisfactoriamente");

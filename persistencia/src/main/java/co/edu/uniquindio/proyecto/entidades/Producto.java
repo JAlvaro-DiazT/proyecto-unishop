@@ -94,7 +94,7 @@ public class Producto implements Serializable {
     @ToString.Exclude
     private List<Usuario> miFavoritoUsuario;
 
-    @OneToOne
+    @ManyToOne
     private Seguro seguro;
 
     public Producto(String nombre, Integer unidades, String descripcion, float precio, float descuento, LocalDateTime fecha_limite, List<String> imagen, Ciudad ciudad, Usuario vendedor, Seguro seguro) {
