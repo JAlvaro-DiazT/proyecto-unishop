@@ -38,4 +38,6 @@ public interface ProductoServicio {
 
 
     List<Producto> listarMisProductos(Usuario usuarioSesion) throws Exception;
+
+    Subasta agregarSubasta(Subasta subasta) throws Exception;
 }

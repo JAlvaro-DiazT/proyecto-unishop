@@ -13,47 +13,54 @@
     <ui:define name="content">
         <h:form>
             <p>#{seguridadBean.obtenerMisProductos()}</p>
-            <p:dataView value="#{seguridadBean.misProductos}" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+            <p:dataView value="#{seguridadBean.misProductos}" var="producto" gridIcon="pi pi-th-large"
+                        listIcon="pi pi-bars">
                 <p:dataViewGridItem>
-                    <div class="card" >
+                    <div class="card">
                         <img src="/uploads/#{producto.imagenPrincipal}" class="card-img-top"
 
-                             alt="..." />
+                             alt="..."/>
 
                         <div class="card-body">
                             <h5 class="card-title">#{producto.nombre}</h5>
                             <p class="card-text">$#{producto.precio}</p>
-                            <hr />
-                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irADetaller(producto.codigo)}"/>
+
+                            <p:commandButton value="Subastar" icon="pi pi-dollar" update="@form"
+                                             action="#{seguridadBean.subastar(producto)}"/>
+                            <p:growl for="subastarMensaje" showDetail="true"/>
 
                         </div>
                     </div>
                 </p:dataViewGridItem>
 
                 <p:dataViewListItem>
-                    <div class="row d-flex item-pro" >
-                        <div class="col-lg-2 col-md-1" style="text-align: center" >
-                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}" styleClass="imagen-producto" />
+                    <div class="row d-flex item-pro">
+                        <div class="col-lg-2 col-md-1" style="text-align: center">
+                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}" styleClass="imagen-producto"/>
 
                         </div>
-                        <div class="col-lg-8 col-md-1 align-self-center" >
+                        <div class="col-lg-8 col-md-1 align-self-center">
                             <p:outputPanel>
                                 <h:panelGrid columns="2" cellpadding="5">
-                                    <h:outputText value="Nombre:" />
-                                    <h:outputText value="#{producto.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Nombre:"/>
+                                    <h:outputText value="#{producto.nombre}" style="font-weight: bold"/>
 
-                                    <h:outputText value="Precio:" />
-                                    <h:outputText value="$#{producto.precio}" />
-
-
+                                    <h:outputText value="Precio:"/>
+                                    <h:outputText value="$#{producto.precio}"/>
 
 
                                 </h:panelGrid>
                             </p:outputPanel>
                         </div>
-                        <div class="col-lg-2 col-md-1 align-self-center" >
-                            <p:commandButton value="Subastar" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irADetaller(producto.codigo)}" />
+
+                        <div class="col-lg-2 col-md-1 align-self-center">
+
+                                <p:commandButton value="Subastar" icon="pi pi-dollar" update="@form"
+                                                 action="#{seguridadBean.subastar(producto)}"/>
+                                <p:growl for="subastarMensaje" showDetail="true"/>
+
                         </div>
+
                     </div>
                 </p:dataViewListItem>
 

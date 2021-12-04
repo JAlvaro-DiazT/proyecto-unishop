@@ -3,10 +3,7 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
-import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
-import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
-import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
-import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -23,12 +20,14 @@ public class ProductoServicioImpl implements ProductoServicio{
     private final ComentarioRepo comentarioRepo;
     private final CompraRepo compraRepo;
     private final DetalleCompraRepo detalleCompraRepo;
+    private final SubastaRepo subastaRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo, CompraRepo compraRepo, DetalleCompraRepo detalleCompraRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo, CompraRepo compraRepo, DetalleCompraRepo detalleCompraRepo, SubastaRepo subastaRepo) {
         this.productoRepo = productoRepo;
         this.comentarioRepo = comentarioRepo;
         this.compraRepo = compraRepo;
         this.detalleCompraRepo = detalleCompraRepo;
+        this.subastaRepo = subastaRepo;
     }
 
     @Override
@@ -139,5 +138,11 @@ public class ProductoServicioImpl implements ProductoServicio{
     public List<Producto> listarMisProductos(Usuario usuarioSesion) throws Exception
     {
        return productoRepo.listarProductosUsuario(usuarioSesion.getCodigo());
+    }
+
+    @Override
+    public Subasta agregarSubasta(Subasta subasta) throws Exception
+    {
+          return subastaRepo.save(subasta);
     }
 }

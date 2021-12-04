@@ -69,13 +69,22 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private  ArrayList<Producto> misProductos;
 
+    @Getter @Setter
+    private ArrayList<Producto> productoSubasta;
+
+    @Getter @Setter
+    private Subasta subasta;
+
     @PostConstruct
     public void inicializar(){
         this.compra = new Compra();
         this.subtotal = 0F;
         this.productosCarrito = new ArrayList<>();
+        this.productoSubasta = new ArrayList<>();
+        this.subasta = new Subasta();
         medioPagos=medioPagoServicio.listarMediosPagos();
         empresaMensajerias=empresaMensajeriaServicio.listarEmpresasMensajerias();
+
 
 
     }
@@ -163,6 +172,25 @@ public class SeguridadBean implements Serializable {
                 e.printStackTrace();
             }
         }
+    }
+    public void subastar(Producto miProducto){
+
+        if( !productoSubasta.contains(miProducto) ){
+
+
+            try {
+                productoSubasta.add(miProducto);
+                subasta.setFecha_limite(LocalDateTime.now().plusMonths(1));
+                subasta.setMiProducto(miProducto);
+                productoServicio.agregarSubasta(subasta);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto subastado con exito");
+            FacesContext.getCurrentInstance().addMessage("subastarMensaje", fm);
+        }
+
     }
 
 }
