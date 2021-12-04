@@ -1,10 +1,9 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DetalleCompraServicio{
-    ArrayList<DetalleCompra> listarDetallesCompra(Integer codigoCompra);
+    List<DetalleCompra> listarDetallesCompra(Integer codigoCompra)throws Exception;
 }

@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <h5 class="card-title">#{compra.codigo}</h5>
                             <h5 class="card-title">#{compra.fecha_compra}</h5>
-                            <p class="card-text">#{compra.medio_pago}</p>
+                            <p class="card-text">#{compra.medio_pago.nombre}</p>
 
                             <p:commandButton value="Detalle Compra" icon="pi pi-dollar" update="@form"
                                              action="#{seguridadBean.mostrarDetalleCompra(compra.codigo)}"/>
@@ -43,7 +43,7 @@
                                     <h:outputText value="#{compra.fecha_compra}"/>
 
                                     <h:outputText value="Medio de pago"/>
-                                    <h:outputText value="#{compra.medio_pago}"/>
+                                    <h:outputText value="#{compra.medio_pago.nombre}"/>
 
 
                                 </h:panelGrid>

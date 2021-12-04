@@ -7,18 +7,19 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+>
 <ui:composition template="/WEB-INF/template.xhtml">
     <ui:define name="title">Detalle Compra</ui:define>
 
     <ui:define name="content">
-        <div class="row w-100">
-            <div class="col-lg-12 col-md-12 col-12">
-                <h:form id="form">
+        <h:form id="form">
+            <div class="row w-100">
+                <div class="col-lg-12 col-md-12 col-12">
 
                     <h1>Detalle de la compra</h1>
                     <p class="mb-5 text-center">
-                        <i class="text-info font-weight-bold">#{seguridadBean.listarDetalleCompra()}</i> Compras Realizadas</p>
+                        <i class="text-info font-weight-bold">#{seguridadBean.listarDetalleCompra()}</i> Compras Realizadas
+                    </p>
                     <table id="shoppingCart" class="table table-condensed table-responsive">
                         <thead>
                         <tr>
@@ -43,7 +44,7 @@
                                 </td>
                                 <td>$#{compras.miProducto.precio}</td>
                                 <td>
-                                    $#{compras.unidades}
+                                    #{compras.unidades}
                                 </td>
                             </tr>
                         </p:repeat>
@@ -51,13 +52,15 @@
                     </table>
                     <div class="text-end">
                         <h4>Subtotal:</h4>
+
                         <h1 jsf:id="subtotal-carrito">$#{seguridadBean.subtotal}</h1>
 
                     </div>
 
-                </h:form>
+
+                </div>
             </div>
-        </div>
+        </h:form>
     </ui:define>
 
 </ui:composition>

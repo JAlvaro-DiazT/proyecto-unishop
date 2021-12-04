@@ -85,6 +85,8 @@ public class SeguridadBean implements Serializable {
     @Value("#{param['compra']}")
     private Integer codigoCompra;
 
+    private int total;
+
     @PostConstruct
     public void inicializar(){
         this.compra = new Compra();
@@ -212,19 +214,24 @@ public class SeguridadBean implements Serializable {
     }
 
 
-    public String mostrarDetalleCompra(Integer codigo) {
-
+    public String mostrarDetalleCompra(String codigo) {
+        this.codigoCompra=Integer.parseInt(codigo);
         return "detalleCompra?faces-redirect=true&amp;compra="+codigo;
     }
 
     public void listarDetalleCompra(){
         if(usuarioSesion!=null){
             try{
-                this.detalleCompras = detalleCompraServicio.listarDetallesCompra(codigoCompra);
+                this.detalleCompras = (ArrayList<DetalleCompra>) detalleCompraServicio.listarDetallesCompra(codigoCompra);
                 comprasUsuario.forEach(System.out::println);
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
+    }
+    public void calcularSubTotal(){
+        total= (int) (detalleCompras.get(codigoCompra).getUnidades()*detalleCompras.get(codigoCompra).getPrecio_producto());
+
+
     }
 }

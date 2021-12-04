@@ -28,6 +28,6 @@ public interface CompraRepo extends JpaRepository<Compra, Integer> {
     @Query("select c from Compra c where c.miUsuario.codigo = :codigo ")
     List<Compra> listarProductosUsuario(Integer codigo);
 
-    @Query("select d from DetalleCompra d where d.codigo = :codigoCompra")
-    ArrayList<DetalleCompra> listarCompras(Integer codigoCompra);
+    @Query("select d from DetalleCompra d where d.miCompra.codigo = :codigoCompra")
+    List<DetalleCompra> listarCompras(Integer codigoCompra);
 }
