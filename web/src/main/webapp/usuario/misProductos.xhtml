@@ -12,7 +12,8 @@
 
     <ui:define name="content">
         <h:form>
-            <p:dataView value="#{seguridadBean.productoCodig}" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+            <p>#{seguridadBean.obtenerMisProductos()}</p>
+            <p:dataView value="#{seguridadBean.misProductos}" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
                 <p:dataViewGridItem>
                     <div class="card" >
                         <img src="/uploads/#{producto.imagenPrincipal}" class="card-img-top"
@@ -51,7 +52,7 @@
                             </p:outputPanel>
                         </div>
                         <div class="col-lg-2 col-md-1 align-self-center" >
-                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irADetaller(producto.codigo)}" />
+                            <p:commandButton value="Subastar" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irADetaller(producto.codigo)}" />
                         </div>
                     </div>
                 </p:dataViewListItem>

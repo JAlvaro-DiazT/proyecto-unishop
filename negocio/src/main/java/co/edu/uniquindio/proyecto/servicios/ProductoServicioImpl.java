@@ -133,8 +133,11 @@ public class ProductoServicioImpl implements ProductoServicio{
         }
     }
 
+
+
     @Override
-    public List<Producto> listarProductoPorCodigo(Integer codigoUsuario)throws Exception {
-         return productoRepo.listarPorCodigo(codigoUsuario);
+    public List<Producto> listarMisProductos(Usuario usuarioSesion) throws Exception
+    {
+       return productoRepo.listarProductosUsuario(usuarioSesion.getCodigo());
     }
 }

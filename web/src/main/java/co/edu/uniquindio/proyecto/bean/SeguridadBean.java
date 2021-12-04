@@ -66,6 +66,9 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private List<Producto> productoCodig;
 
+    @Getter @Setter
+    private  ArrayList<Producto> misProductos;
+
     @PostConstruct
     public void inicializar(){
         this.compra = new Compra();
@@ -73,11 +76,7 @@ public class SeguridadBean implements Serializable {
         this.productosCarrito = new ArrayList<>();
         medioPagos=medioPagoServicio.listarMediosPagos();
         empresaMensajerias=empresaMensajeriaServicio.listarEmpresasMensajerias();
-        try {
-            productoCodig = productoServicio.listarProductoPorCodigo(usuarioSesion.getCodigo());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
     }
 
@@ -147,6 +146,21 @@ public class SeguridadBean implements Serializable {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
 
+            }
+        }
+    }
+
+    public void obtenerMisProductos()
+    {
+        if(usuarioSesion!=null)
+        {
+            try
+            {
+                this.misProductos= (ArrayList<Producto>) productoServicio.listarMisProductos(usuarioSesion);
+
+            }catch (Exception e)
+            {
+                e.printStackTrace();
             }
         }
     }
