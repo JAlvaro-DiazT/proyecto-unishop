@@ -14,23 +14,26 @@
 
     <ui:define name="content">
         <div class="container">
-            <p>#{detalleProductoBean.producto}</p>
+            <h1>Detalles de #{detalleProductoBean.producto.nombre}</h1>
         </div>
 
-        <div class="col-lg-5 col-md-1">
-            <div class="p-grid">
+        <div id="contenedor">
+
+            <div id="imagen">
                 <div class="box">
                     <p:graphicImage value="/uploads/#{detalleProductoBean.producto.imagenPrincipal}" class="img-fluid d-none d-md-block rounded mb-2 shadow "/>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-5 col-md-1">
-            <div class="p-grid">
+            <div id="lateral">
+
                 <div class="box">
+                    <h1 class="mt-4">Calificacion</h1>
+                    <h1 class="mt-4">*****</h1>
+                </div>
 
-                     <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
-
+                <div class="box">
+                    <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
                     <h1 class="mt-4">#{detalleProductoBean.producto.precio}</h1>
                     <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
                         <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart" update="@form" action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal)}" />
@@ -41,7 +44,12 @@
                     <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombre}</p>
                 </div>
             </div>
+
         </div>
+
+
+
+
 
         <div class="container">
 

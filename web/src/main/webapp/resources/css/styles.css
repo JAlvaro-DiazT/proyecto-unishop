@@ -189,3 +189,23 @@
 #info-sesion > h5 {
     margin-bottom: 0;
 }
+
+div#contenedor{
+    margin: auto;
+    margin-top: 50px;
+    width: 1120px;
+    height: 600px;
+}
+
+div#imagen{
+    float: left;
+    width: 550px;
+    height: 550px;
+}
+
+div#lateral{
+    float: right;
+    width: 550px;
+    height: 550px;
+}
+
