@@ -70,4 +70,16 @@ public class DetalleProductoBean implements Serializable {
 
     }
 
+    public Integer obtenerCalificacionPromedio() {
+        Integer calificacionPromedio = 0;
+
+        for (int i = 0; i < comentarios.size(); i++){
+            calificacionPromedio += comentarios.get(i).getCalificacion();
+        }
+        if(comentarios.size() > 0){
+            calificacionPromedio = calificacionPromedio / comentarios.size();
+        }
+
+        return calificacionPromedio;
+    }
 }
