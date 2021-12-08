@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,6 +40,7 @@ public class Categoria implements Serializable {
 
     @ManyToMany(mappedBy = "categoria")
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto> producto;
 
     public Categoria(Integer codigo, String nombre) {

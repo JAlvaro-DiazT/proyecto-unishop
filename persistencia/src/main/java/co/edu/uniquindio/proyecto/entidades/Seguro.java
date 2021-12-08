@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +51,7 @@ public class Seguro implements Serializable {
 
     @OneToMany(mappedBy = "seguro")
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto> miProducto;
 
     public Seguro(Integer codigo, String descripcion, LocalDateTime fecha_inicio, LocalDateTime fecha_vencimiento, float valor) {

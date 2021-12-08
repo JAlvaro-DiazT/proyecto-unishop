@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -42,6 +43,7 @@ public class EmpresaMensajeria implements Serializable {
 
     @OneToMany(mappedBy = "miEmpresaMensajeria")
     @ToString.Exclude
+    @JsonIgnore
     private List<Compra> miCompra;
 
     public EmpresaMensajeria(Integer codigo, String nombre, String telefono) {

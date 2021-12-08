@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -62,6 +63,7 @@ public class Producto implements Serializable {
 
     @OneToMany(mappedBy = "miProducto")
     @ToString.Exclude
+    @JsonIgnore
     private List<DetalleCompra> miDetalleCompra;
 
     @Future
@@ -80,18 +82,22 @@ public class Producto implements Serializable {
 
     @OneToMany(mappedBy = "miProducto")
     @ToString.Exclude
+    @JsonIgnore
     private List<Subasta> miSubasta;
 
     @OneToMany(mappedBy = "miProducto")
     @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> miComentario;
 
     @ManyToMany
     @ToString.Exclude
+    @JsonIgnore
     private List<Categoria> categoria;
 
     @ManyToMany
     @ToString.Exclude
+    @JsonIgnore
     private List<Usuario> miFavoritoUsuario;
 
     @ManyToOne
