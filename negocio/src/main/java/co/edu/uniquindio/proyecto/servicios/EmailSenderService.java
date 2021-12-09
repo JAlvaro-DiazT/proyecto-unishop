@@ -13,6 +13,8 @@ public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
+
+
     public void sendSimpleEmail(String toEmail, String body, String subject) throws Exception{
 
 
@@ -21,7 +23,7 @@ public class EmailSenderService {
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
         mimeMessageHelper.setFrom("carolinitatorres329@gmail.com");
-        mimeMessageHelper.setTo("carolinitatorres329@gmail.com");
+        mimeMessageHelper.setTo(toEmail);
         mimeMessageHelper.setText(body,true);
         mimeMessageHelper.setSubject(subject);
 

@@ -250,15 +250,15 @@ public class SeguridadBean implements Serializable {
         String mensaje = "<h1>UNISHOP</h1>";
 
         mensaje += "<h2>Hola, " + usuarioSesion.getNombre() + "</h2>"
-                + "\n\nTu pedido ha sido confirmado, llegará en los próximos días.\n"
+                + "\n\nGracias por comprar en unishop.\n"
                 + "\n<h4>DETALLES DE LA COMPRA</h4>"
                 + "<P>" + productosCompra() + "</P>"
-                + "</br>SubTotal: $" + subTotal
-                + "<h2>Total compra: $" + subTotal
-                + "</h2></br></br>Atentamente, "
+                +"Enviado por: \n "
+                +compra.getMiEmpresaMensajeria()
+                + "</br></br>Atentamente, "
                 + "<h3>UNISHOP</h3>";
         try {
-            emailSenderService.sendSimpleEmail("carolinitatorres329@gmail.com", mensaje,
+            emailSenderService.sendSimpleEmail(usuarioSesion.getEmail(), mensaje,
                     "Compra Unishop");
         } catch (Exception e) {
             e.printStackTrace();
