@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.rest;
 
 import co.edu.uniquindio.proyecto.dto.Mensaje;
+import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
@@ -17,6 +18,8 @@ public class ProductoRestController {
 
     @Autowired
     private ProductoServicio productoServicio;
+
+
 
     @GetMapping
     public List<Producto> listar(){
@@ -66,5 +69,64 @@ public class ProductoRestController {
         }
 
     }
+    @GetMapping("/categoria/{cat}")
+    public ResponseEntity<?> categoria(@PathVariable("cat") String categoria) {
+        try{
 
+            Categoria categoria1 = productoServicio.obtenerCategoria(categoria);
+            List<Producto> listaProduc = productoServicio.listarProductos(categoria1);
+            return  ResponseEntity.status(200).body(listaProduc);
+        }catch(Exception e){
+            return  ResponseEntity.status(500).body(new Mensaje("Categoria no encontrada"));
+        }
+    }
+
+
+    //Buscar por medio de rango de precio.
+    @GetMapping("/precio/{precio1}/{precio2}")
+    public ResponseEntity<?> rangoPrecio(@PathVariable("precio1") Float precio1, @PathVariable("precio2")Float precio2) {
+        try{
+            List<Producto> listaProduc = productoServicio.listarProductosRangoPrecio(precio1, precio2);
+            return  ResponseEntity.status(200).body(listaProduc);
+        }catch(Exception e){
+            return  ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+    }
+
+    //Buscar por medio de lugar.
+    @GetMapping("/ciudad/{ciudad}")
+    public ResponseEntity<?> buscarPorCiudad(@PathVariable("ciudad") String ciudad) {
+        try{
+            List<Producto> listaProduc = productoServicio.listarProductosCiudad(ciudad);
+            return  ResponseEntity.status(200).body(listaProduc);
+        }catch(Exception e){
+            return  ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+    }
+
+
+    //------------------------------------------------------------------------
+
+
+    //Buscar por descuento.
+    @GetMapping("/descuento/{descuento}")
+    public ResponseEntity<?> buscarPorDescuento(@PathVariable("descuento") float descuento) {
+        try{
+            List<Producto> listaProduc = productoServicio.listarPorDescuento(descuento);
+            return  ResponseEntity.status(200).body(listaProduc);
+        }catch(Exception e){
+            return  ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+    }
+
+    //Buscar por descuento.
+    @GetMapping("/seguro/{seguro}")
+    public ResponseEntity<?> buscarPorSeguro(@PathVariable("seguro") int codigo) {
+        try{
+            List<Producto> listaProduc = productoServicio.listarPorSeguro(codigo);
+            return  ResponseEntity.status(200).body(listaProduc);
+        }catch(Exception e){
+            return  ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+    }
 }

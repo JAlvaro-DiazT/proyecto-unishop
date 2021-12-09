@@ -37,4 +37,15 @@ public interface ProductoServicio {
     List<Producto> listarMisProductos(Usuario usuarioSesion) throws Exception;
 
     Subasta agregarSubasta(Subasta subasta) throws Exception;
+
+    Categoria obtenerCategoria(String categoria);
+
+    List<Producto> listarProductosRangoPrecio(Float precio1, Float precio2);
+
+    List<Producto> listarProductosCiudad(String ciudad);
+
+    List<Producto>listarPorDescuento(float descuento);
+
+    List<Producto>listarPorSeguro(int codigo);
+
 }
