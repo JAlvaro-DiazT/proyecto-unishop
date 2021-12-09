@@ -149,4 +149,30 @@ public class ProductoServicioImpl implements ProductoServicio{
     public Subasta agregarSubasta(Subasta subasta) throws Exception {
           return subastaRepo.save(subasta);
     }
+
+    @Override
+    public Categoria obtenerCategoria(String categoria)
+    {
+        return productoRepo.obtenerCategoria(categoria);
+    }
+
+    @Override
+    public List<Producto> listarProductosRangoPrecio(Float precio1, Float precio2) {
+        return productoRepo.listarPorRangoDePrecios(precio1,precio2);
+    }
+
+    @Override
+    public List<Producto> listarProductosCiudad(String ciudad) {
+        return productoRepo.listarProductosCiudad ( ciudad);
+    }
+
+    @Override
+    public List<Producto> listarPorDescuento(float descuento) {
+        return productoRepo.listarPorDescuento(descuento);
+    }
+
+    @Override
+    public List<Producto> listarPorSeguro(int codigo) {
+        return productoRepo.listarPorSeguro(codigo);
+    }
 }
