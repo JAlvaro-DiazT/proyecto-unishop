@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -87,6 +88,12 @@ public class SeguridadBean implements Serializable {
 
     private float subTotal;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
     @PostConstruct
     public void inicializar(){
         this.compra = new Compra();
@@ -155,6 +162,7 @@ public class SeguridadBean implements Serializable {
 
 
                 productoServicio.comprarProductos(productosCarrito, compra);
+                triggerMail();
                 compra=new Compra();
 
                 productosCarrito.clear();
@@ -235,5 +243,34 @@ public class SeguridadBean implements Serializable {
         for (DetalleCompra detalle:detalleCompras) {
             subTotal+=detalle.getUnidades()*detalle.getPrecio_producto();
         }
+    }
+
+    public void triggerMail(){
+
+        String mensaje = "<h1>UNISHOP</h1>";
+
+        mensaje += "<h2>Hola, " + usuarioSesion.getNombre() + "</h2>"
+                + "\n\nTu pedido ha sido confirmado, llegará en los próximos días.\n"
+                + "\n<h4>DETALLES DE LA COMPRA</h4>"
+                + "<P>" + productosCompra() + "</P>"
+                + "</br>SubTotal: $" + subTotal
+                + "<h2>Total compra: $" + subTotal
+                + "</h2></br></br>Atentamente, "
+                + "<h3>UNISHOP</h3>";
+        try {
+            emailSenderService.sendSimpleEmail("carolinitatorres329@gmail.com", mensaje,
+                    "Compra Unishop");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public String productosCompra(){
+        String mensaje="";
+        for(int i=0; i<productosCarrito.size();i++){
+            mensaje=mensaje.concat(productosCarrito.get(i).getNombre())+"     ";
+            mensaje=mensaje.concat(String.valueOf(productosCarrito.get(i).getPrecio()))+"    ";
+            mensaje.concat("\\t");
+        }
+        return mensaje;
     }
 }

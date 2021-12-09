@@ -35,13 +35,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-       
-        <dependency>
 
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-
-        </dependency>
     </dependencies>
 
 </project>
