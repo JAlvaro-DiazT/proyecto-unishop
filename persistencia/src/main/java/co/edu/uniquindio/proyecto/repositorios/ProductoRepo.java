@@ -36,15 +36,13 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p where :categoria member of p.categoria")
     List<Producto> listarPorCategoria(Categoria categoria);
 
-
-
     @Query("select p.unidades from Producto p where p.codigo = :id")
     Integer obtenerTotalUnidadesDisponibles(Integer id);
 
     @Query("select p from Producto p where p.vendedor.codigo = :codigo ")
     List<Producto> listarProductosUsuario(Integer codigo);
 
-    @Query("select c from Categoria c where c.nombre =: nombreCategoria")
+    @Query("select c from Categoria c where c.nombre like concat('%', :nombreCategoria, '%')")
      Categoria obtenerCategoria(String nombreCategoria);
 
 
@@ -54,10 +52,13 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p where  p.ciudad.nombre = :Ciudad")
     List<Producto>listarProductosCiudad(String Ciudad);
 
-    @Query("select p from Producto p where  p.descuento = :descuento")
+    @Query("select p from Producto p where  p.descuento >= :descuento")
     List<Producto>listarPorDescuento(float descuento);
 
 
     @Query("select p from Producto p where  p.seguro.codigo = :codigo")
     List<Producto>listarPorSeguro(int codigo);
+
+    @Query("select p.unidades from Producto p where p.codigo = :codigo ")
+    Number cantidadProducto(Integer codigo);
 }

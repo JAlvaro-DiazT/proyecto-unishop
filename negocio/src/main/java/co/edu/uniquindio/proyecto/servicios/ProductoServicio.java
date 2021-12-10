@@ -48,4 +48,5 @@ public interface ProductoServicio {
 
     List<Producto>listarPorSeguro(int codigo);
 
+    Number cantidadProducto(Integer codigo);
 }

@@ -250,25 +250,28 @@ public class SeguridadBean implements Serializable {
         String mensaje = "<h1>UNISHOP</h1>";
 
         mensaje += "<h2>Hola, " + usuarioSesion.getNombre() + "</h2>"
-                + "\n\nGracias por comprar en unishop.\n"
-                + "\n<h4>DETALLES DE LA COMPRA</h4>"
+                + "\n\nUnishop te informa que tu compra se realizo exitosamente.\n"
+                + "\n<h4>DETALLES DE TU COMPRA</h4>"
                 + "<P>" + productosCompra() + "</P>"
                 +"Enviado por: \n "
-                +compra.getMiEmpresaMensajeria()
+                +compra.getMiEmpresaMensajeria().getNombre()
+                +"\n"+compra.getMiEmpresaMensajeria().getTelefono()
                 + "</br></br>Atentamente, "
                 + "<h3>UNISHOP</h3>";
         try {
             emailSenderService.sendSimpleEmail(usuarioSesion.getEmail(), mensaje,
-                    "Compra Unishop");
+                    "Confirmacion compra");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public String productosCompra(){
         String mensaje="";
         for(int i=0; i<productosCarrito.size();i++){
             mensaje=mensaje.concat(productosCarrito.get(i).getNombre())+"     ";
-            mensaje=mensaje.concat(String.valueOf(productosCarrito.get(i).getPrecio()))+"    ";
+            mensaje=mensaje.concat(String.valueOf(productosCarrito.get(i).getPrecio()))+"     ";
+            mensaje=mensaje.concat(String.valueOf(productosCarrito.get(i).getUnidades()))+"\n";
             mensaje.concat("\\t");
         }
         return mensaje;

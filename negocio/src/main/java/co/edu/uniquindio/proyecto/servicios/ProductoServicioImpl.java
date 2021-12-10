@@ -175,4 +175,9 @@ public class ProductoServicioImpl implements ProductoServicio{
     public List<Producto> listarPorSeguro(int codigo) {
         return productoRepo.listarPorSeguro(codigo);
     }
+
+    @Override
+    public Number cantidadProducto(Integer codigo) {
+        return productoRepo.cantidadProducto(codigo);
+    }
 }

@@ -70,11 +70,28 @@ public class ProductoRestController {
 
     }
     @GetMapping("/categoria/{cat}")
-    public ResponseEntity<?> categoria(@PathVariable("cat") String categoria) {
+    public ResponseEntity<?> categoria(@PathVariable("cat") String cat) {
         try{
 
-            Categoria categoria1 = productoServicio.obtenerCategoria(categoria);
-            List<Producto> listaProduc = productoServicio.listarProductos(categoria1);
+            Categoria categoria = productoServicio.obtenerCategoria(cat);
+            Integer codCategoria = categoria.getCodigo();
+            List<Producto> productos = productoServicio.listarTodosProductos();
+            List<Producto> listaProduc = null;
+
+            for (int i=0; i<productos.size(); i++){
+                Producto producto = productos.get(i);
+                List<Categoria> categorias = producto.getCategoria();
+
+                for (int j=0; j<categorias.size(); j++){
+                    Categoria categor = categorias.get(j);
+                    int codCat = categor.getCodigo();
+
+                    if(codCat == codCategoria){
+                        listaProduc.add(producto);
+                    }
+                }
+            }
+
             return  ResponseEntity.status(200).body(listaProduc);
         }catch(Exception e){
             return  ResponseEntity.status(500).body(new Mensaje("Categoria no encontrada"));
